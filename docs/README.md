@@ -1,7 +1,7 @@
 ---
 
 home: true
-heroImage: /images/hdImg.jpg
+heroImage: /hd-img.jpg
 actionText: 进入博客 →
 actionLink: guide.html
 features:
