@@ -1,0 +1,31 @@
+{
+  "name": "lorainwings-blog",
+  "version": "1.0.0",
+  "description": "个人主页",
+  "main": "index.js",
+  "scripts": {
+    "start": "vuepress dev docs",
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "keywords": [],
+  "author": "lorain",
+  "license": "MIT",
+  "dependencies": {
+    "wrap-vue-cli-tool": "^1.0.4"
+  },
+  "devDependencies": {
+    "vuepress": "^1.2.0"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorainwings/lorainwings.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lorainwings/lorainwings.github.io/issues"
+  },
+  "homepage": "https://github.com/lorainwings/lorainwings.github.io#readme"
+}
