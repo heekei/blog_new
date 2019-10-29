@@ -1,3 +1,15 @@
+const genSidebar = (title, children) => {
+  return {
+    title,
+    collapsable: false,
+    children: [
+      '',
+      ...children
+    ]
+  }
+
+}
+
 module.exports = {
   title: 'Lorain\'s个人主页',
   description: '记录技术&生活',
@@ -16,41 +28,37 @@ module.exports = {
   },
   themeConfig: {
     nav: [ // 导航栏配置
-      { text: '前端总结', link: '/accumulate/' },
+      { text: '记录技术', link: '/skills/' },
       { text: '算法题库', link: '/algorithm/' },
-      { text: '诗和远方', link: '/others/' },
-      { text: 'Github', link: 'https://github.com/lorainwings' }
+      { text: '热爱生活', link: '/life/' },
+      { text: 'Github', link: 'https://github.com/lorainwings', target: '_blank', rel: '' }
     ],
-    // sidebar:{
-    //   '/accumulate/': [
-    //       {
-    //         title: '前端积累',
-    //         children: [
-    //           '/accumulate/1.html',
-    //           '/accumulate/2.html',
-    //           '/accumulate/3.html',
-    //           '/accumulate/4.html',
-    //           '/accumulate/5.html',
-    //           '/accumulate/6.html',
-    //           '/accumulate/7.html',
-    //           '/accumulate/8.html',
-    //           '/accumulate/9.html',
-    //           '/accumulate/10.html',
-    //           '/accumulate/11.html',
-    //         ]
-    //       }
-    //     ],
-    //     '/algorithm/': [
-    //       '/algorithm/',
-    //       {
-    //         title: '第二组侧边栏下拉框的标题1',
-    //         children: [
-    //           '/algorithm/'
-    //         ]
-    //       }
-    //     ]
-    // },
+    sidebar: {
+      '/skills': [
+        genSidebar('Js进阶', [
+          'base64',
+        ]),
+        genSidebar('Html5', []),
+        genSidebar('Linux相关', [
+          'docker',
+        ])
+      ],
+      '/algorithm/': [],
+      '/life/': []
+    },
     sidebar: 'auto', // 侧边栏配置
-    sidebarDepth: 2
-  }
+    sidebarDepth: 2,
+    lastUpdated: '更新时间'
+  },
+  plugins: [
+    '@vuepress/nprogress',
+    '@vuepress/last-updated',
+    '@vuepress/back-to-top',
+    '@vuepress/active-header-links',
+    '@vuepress/search',
+    '@vuepress/google-analytics',
+    {
+      'ga': 'UA-151094245-1'
+    }
+  ]
 };

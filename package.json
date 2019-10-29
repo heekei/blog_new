@@ -11,10 +11,13 @@
   "keywords": [],
   "author": "lorain",
   "license": "MIT",
-  "dependencies": {
-    "wrap-vue-cli-tool": "^1.0.4"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@vuepress/plugin-active-header-links": "^1.0.0-rc.1",
+    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
+    "@vuepress/plugin-google-analytics": "^1.2.0",
+    "@vuepress/plugin-nprogress": "^1.0.0-rc.1",
+    "prettier": "^1.18.2",
     "vuepress": "^1.2.0"
   },
   "directories": {
