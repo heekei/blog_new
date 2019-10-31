@@ -34,9 +34,10 @@ module.exports = {
       { text: 'Github', link: 'https://github.com/lorainwings', target: '_blank', rel: '' }
     ],
     sidebar: {
-      '/skills': [
+      '/skills/': [
         genSidebar('Js进阶', [
           'base64',
+          'promise'
         ]),
         genSidebar('Html5', []),
         genSidebar('Linux相关', [
