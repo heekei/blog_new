@@ -35,9 +35,9 @@ module.exports = {
     ],
     sidebar: {
       '/skills/': [
-        genSidebar('Js进阶', [
-          'base64',
-          'promise'
+        genSidebar('JS进阶', [
+          'promise',
+          'base64'
         ]),
         genSidebar('Html5', []),
         genSidebar('Linux相关', [
@@ -49,7 +49,10 @@ module.exports = {
     },
     sidebar: 'auto', // 侧边栏配置
     sidebarDepth: 2,
-    lastUpdated: '更新时间'
+    lastUpdated: '更新时间',
+    docsDir: "docs",
+    editLinks: true,
+    editLinkText: "源码地址"
   },
   plugins: [
     '@vuepress/nprogress',

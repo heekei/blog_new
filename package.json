@@ -25,10 +25,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lorainwings/lorainwings.github.io.git"
+    "url": "git+https://github.com/lorainwings/blog.git"
   },
   "bugs": {
-    "url": "https://github.com/lorainwings/lorainwings.github.io/issues"
+    "url": "https://github.com/lorainwings/blog/issues"
   },
-  "homepage": "https://github.com/lorainwings/lorainwings.github.io#readme"
+  "homepage": "https://github.com/lorainwings/blog/#readme"
 }

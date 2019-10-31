@@ -4,7 +4,7 @@ home: true
 sidebarDepth: 2
 heroImage: /hd-img.jpg
 actionText: 进入博客 →
-actionLink: guide.html
+actionLink: /skills/
 features:
 
 - title: 前端知识总结
