@@ -3,7 +3,6 @@ const genSidebar = (title, children) => {
     title,
     collapsable: false,
     children: [
-      '',
       ...children
     ]
   }
@@ -44,11 +43,15 @@ module.exports = {
           'docker',
         ])
       ],
-      '/algorithm/': [],
-      '/life/': []
+      '/algorithm/': [
+        genSidebar('基础算法', []),
+        genSidebar('高级算法', []),
+      ],
+      '/life/': [
+        genSidebar('名人语录', []),
+        genSidebar('诗词歌赋', []),
+      ]
     },
-    sidebar: 'auto', // 侧边栏配置
-    sidebarDepth: 2,
     lastUpdated: '更新时间',
     docsDir: "docs",
     editLinks: true,

@@ -17,6 +17,7 @@
     "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
     "@vuepress/plugin-google-analytics": "^1.2.0",
     "@vuepress/plugin-nprogress": "^1.0.0-rc.1",
+    "lint-md": "^0.2.0",
     "prettier": "^1.18.2",
     "vuepress": "^1.2.0"
   },
