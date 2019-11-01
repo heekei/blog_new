@@ -6,7 +6,6 @@ const genSidebar = (title, children) => {
       ...children
     ]
   }
-
 }
 
 module.exports = {
