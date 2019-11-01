@@ -4,9 +4,11 @@
   "description": "个人主页",
   "main": "index.js",
   "scripts": {
+    "lint": "lint-md  docs/**/*.md --fix ",
     "start": "vuepress dev docs",
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "vuepress build docs",
+    "commit": "git add . && git cm -m'更新文章' && git push origin master"
   },
   "keywords": [],
   "author": "lorain",
@@ -17,9 +19,22 @@
     "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
     "@vuepress/plugin-google-analytics": "^1.2.0",
     "@vuepress/plugin-nprogress": "^1.0.0-rc.1",
-    "lint-md": "^0.2.0",
+    "husky": "^3.0.9",
+    "lint-md-cli": "^0.1.1",
+    "lint-staged": "^9.4.2",
     "prettier": "^1.18.2",
     "vuepress": "^1.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "docs/**/*.{md,markdown}": [
+      "yarn lint",
+      "git add"
+    ]
   },
   "directories": {
     "doc": "docs"
