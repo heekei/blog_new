@@ -53,12 +53,7 @@ module.exports = {
       ]
     },
     lastUpdated: '更新时间',
-    docsDir: "docs",
-    editLinks: true,
-    editLinkText: "源码地址",
-    repo: 'https://github.com/lorainwings/blog',
-    repoLabel: '查看源码',
-    docsBranch: 'master'
+    docsDir: "docs"
   },
   plugins: [
     '@vuepress/nprogress',
