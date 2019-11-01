@@ -48,6 +48,7 @@ module.exports = {
         genSidebar('高级算法', []),
       ],
       '/life/': [
+        genSidebar('生活记录', []),
         genSidebar('名人语录', []),
         genSidebar('诗词歌赋', []),
       ]
@@ -55,7 +56,10 @@ module.exports = {
     lastUpdated: '更新时间',
     docsDir: "docs",
     editLinks: true,
-    editLinkText: "源码地址"
+    editLinkText: "源码地址",
+    repo: 'https://github.com/lorainwings/blog',
+    repoLabel: '查看源码',
+    docsBranch: 'master'
   },
   plugins: [
     '@vuepress/nprogress',
@@ -63,9 +67,11 @@ module.exports = {
     '@vuepress/back-to-top',
     '@vuepress/active-header-links',
     '@vuepress/search',
-    '@vuepress/google-analytics',
-    {
-      'ga': 'UA-151094245-1'
-    }
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'UA-151094245-1'
+      }
+    ]
   ]
 };
