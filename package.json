@@ -8,7 +8,7 @@
     "start": "vuepress dev docs",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "commit": "git add . && git cm -m'更新文章' && git push origin master"
+    "commit": "git add . && echo '请输入提交信息:' && read log &&  git cm -m $log && git push origin master"
   },
   "keywords": [],
   "author": "lorain",
