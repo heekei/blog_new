@@ -35,7 +35,13 @@ module.exports = {
       '/skills/': [
         genSidebar('JS进阶', [
           'promise',
-          'base64'
+          'base64',
+          'babel总结',
+          'rxjs初探',
+          'webpack学习',
+          'webpack模块实现',
+          'git中~和^的用法分析',
+
         ]),
         genSidebar('Html5', []),
         genSidebar('Linux相关', [
