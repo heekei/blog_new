@@ -86,7 +86,7 @@
 
    > 假如 项目 project-main 依赖的 package-a(dependency) 的 package.json 中声明了 peerDependency 是 package-apeer@^1.0.0，而 project-main 中没有任何 package-apeer 的配置，此时在 project-main 下使用 npm3 执行 npm install，控制台就会告警 UNMET PEER DEPENDENCY package-apeer@^1.0.0，意思就是说使用到 package-a 的项目必须安装同时安装 package-apeer@^1.0.0 ，否则程序就可能会有异常，而在 npm@1 和 npm@2 下，就不会报错而是自动把 package-apeer@^1.0.0 安装上，因为很多用户反应这样很困惑，我没声明这个包，你为什么要给我安装呢？所以在 npm@3 中这个 peerDependencies 如果没装就变成了控制台告警。
 
-   #### npm3 的官方文档  中  记录到:
+   #### npm3 的官方文档  中  记录到:
 
    > 通常是在插件开发的场景下，你的插件需要某些依赖的支持，但是你又没必要去安装，因为插件的宿主会去安装这些依赖，你就可以用 peerDependencies 去声明一下需要依赖的插件和版本，如果出问题 npm 就会有警告来提醒使用者去解决版本冲突问题。
 
@@ -518,7 +518,7 @@
 
 - ParallelUglifyPlugin(并行插件)
 
-  注意: 该插件已经无人  维护,可以用 terser-webpack-plugin
+  注意: 该插件已经无人  维护,可以用 terser-webpack-plugin
 
   这个插件可以帮助有很多入口点的项目加快构建速度。把对 JS 文件的串行压缩变为开启多个子进程并行进行 uglify。
 

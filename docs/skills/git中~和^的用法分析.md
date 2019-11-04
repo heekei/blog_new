@@ -4,7 +4,7 @@
 
 先贴图:
 
-![avatr](./assets/git-head.png)
+![avatr](/blog/git-head.png)
 
 ### 提交图的看图技巧:
 
