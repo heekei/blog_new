@@ -40,6 +40,7 @@ module.exports = {
           'rxjs初探',
           'webpack学习',
           'webpack模块实现',
+          'event-loop',
           'git中~和^的用法分析',
 
         ]),

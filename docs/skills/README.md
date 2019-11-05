@@ -11,4 +11,5 @@
 - [rxjs 初探](/skills/rxjs初探/)
 - [webpack 学习](/skills/webpack学习/)
 - [webpack 模块实现](/skills/webpack模块实现/)
+- [event-loop](/skills/event-loop/)
 - [git 中~和^的用法分析](/skills/git中~和^的用法分析/)
