@@ -21,7 +21,7 @@
 > 涉及面试题：什么是执行栈？
 
 可以把执行栈认为是一个存储函数调用的**栈结构**，遵循先进后出的原则。
-![](./7-Event Loop_files/1670d2d20ead32ec)执行栈可视化
+![](/blog/event-loop-1.gif)执行栈可视化
 当开始执行 JS 代码时，首先会执行一个 `main` 函数，然后执行我们的代码。根据先进后出的原则，后执行的函数会先弹出栈，在图中我们也可以发现，`foo` 函数后执行，当执行完毕后就从栈中弹出了。
 
 平时在开发中，大家也可以在报错中找到执行栈的痕迹
@@ -36,7 +36,7 @@
     bar()
 ```
 
-![](./7-Event Loop_files/1670c0e21540090c)函数执行顺序
+![](/blog/event-loop-2.jpg)函数执行顺序
 大家可以在上图清晰的看到报错在 `foo` 函数，`foo` 函数又是在 `bar` 函数中调用的。
 
 当我们使用递归的时候，因为栈可存放的函数是有**限制**的，一旦存放了过多的函数且没有得到释放的话，就会出现爆栈的问题
@@ -48,14 +48,16 @@ function bar() {
 bar();
 ```
 
-![](./7-Event Loop_files/1670c128acce975f)爆栈
+![](/blog/event-loop-3.jpg)爆栈
 
 ## 浏览器中的 Event Loop
 
 > 涉及面试题：异步代码执行顺序？解释一下什么是 Event Loop ？
 
 上一小节我们讲到了什么是执行栈，大家也知道了当我们执行 JS 代码的时候其实就是往执行栈中放入函数，那么遇到异步代码的时候该怎么办？其实当遇到异步的代码时，会被**挂起**并在需要执行的时候加入到 Task（有多种 Task） 队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上来说 JS 中的异步还是同步行为。
-![](./7-Event Loop_files/16740fa4cd9c6937)事件循环
+![](/blog/event-loop-4.jpg)事件循环
+
+
 不同的任务源会被分配到不同的 Task 队列中，任务源可以分为 **微任务**（microtask） 和 **宏任务**（macrotask）。在 ES6 规范中，microtask 称为 `jobs`，macrotask 称为 `task`。下面来看以下代码的执行顺序：
 
 ```js
@@ -87,6 +89,10 @@ new Promise(resolve => {
 
 console.log('script end');
 // script start => async2 end => Promise => script end => promise1 => promise2 => async1 end => setTimeout
+
+//修正后的执行顺序:
+
+// script start => async2 end => Promise => script end => async1 end => promise1 => promise2 => setTimeout
 ```
 
 > 注意：新的浏览器中不是如上打印的，因为 await 变快了，具体内容可以往下看
