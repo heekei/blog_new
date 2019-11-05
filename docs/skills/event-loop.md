@@ -138,7 +138,7 @@ new Promise((resolve, reject) => {
 Node 中的 Event Loop 和浏览器中的是完全不相同的东西。
 
 Node 的 Event Loop 分为 6 个阶段，它们会按照**顺序**反复运行。每当进入某一个阶段的时候，都会从对应的回调队列中取出函数去执行。当队列为空或者执行的回调函数数量到达系统设定的阈值，就会进入下一阶段。
-![](./7-Event Loop_files/1670c3fe3f9a5e2b)
+![](/blog/event-loop.png)
 
 ### timer
 
@@ -212,7 +212,7 @@ close callbacks 阶段执行 close 事件
 在上述代码中，`setImmediate` 永远**先执行**。因为两个代码写在 IO 回调中，IO 回调是在 poll 阶段执行，当回调执行完毕后队列为空，发现存在 `setImmediate` 回调，所以就直接跳转到 check 阶段去执行回调了。
 
 上面介绍的都是 macrotask 的执行情况，对于 microtask 来说，它会在以上每个阶段完成前**清空** microtask 队列，下图中的 Tick 就代表了 microtask
-![](/blog/event-loop.png)
+![](http://ww1.sinaimg.cn/large/715b1061ly1g8n5q4v91sj20hw0y30sv.jpg)
 
 ```js
 setTimeout(() => {
