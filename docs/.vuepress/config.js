@@ -17,9 +17,11 @@ module.exports = {
     }
   },
   head: [ // 注入到当前页面的 HTML <head> 中的标签
-    ['link', { rel: 'icon', href: '/hd-img.jpg' }],
+    ['link', { rel: 'icon', href: '/base/hd-img.jpg' }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
-    ['link', { rel: 'apple-touch-icon', href: '/hd-img.jpg' }],
+    ['link', { rel: 'apple-touch-icon', href: '/base/hd-img.jpg' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { 'http-quiv': 'pragma', cotent: 'no-cache' }],
     ['meta', { 'http-quiv': 'pragma', cotent: 'no-cache,must-revalidate' }],
     ['meta', { 'http-quiv': 'expires', cotent: '0' }]
@@ -47,7 +49,8 @@ module.exports = {
           'webpack模块实现',
           'event-loop',
           'git中~和^的用法分析',
-          '浏览器缓存'
+          '浏览器缓存',
+          '前端安全防范'
         ]),
         genSidebar('Html5', []),
         genSidebar('Linux相关', [
@@ -75,19 +78,12 @@ module.exports = {
     '@vuepress/back-to-top',
     '@vuepress/active-header-links',
     '@vuepress/search',
-    [
-      '@vuepress/google-analytics',
-      {
-        'ga': 'UA-151094245-1'
-      }
-    ],
-    [
-      '@vuepress/last-updated',
-      {
-        transformer(timestamp, lang) {
-          return new Date(timestamp).toLocaleString('zh-CN');
-        }
-      }
-    ]
+    ['@vuepress/google-analytics', {
+      'ga': 'UA-151094245-1'
+    }],
+    ['@vuepress/pwa', {
+      serviceWorker: true,
+      updatePopup: true
+    }],
   ]
 };

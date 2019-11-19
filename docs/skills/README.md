@@ -14,6 +14,7 @@
 - [event-loop](/skills/event-loop/)
 - [git 中~和^的用法分析](/skills/git中~和^的用法分析/)
 - [浏览器缓存](/skills/浏览器缓存/)
+- [前端安全防范](/skills/前端安全防范/)
 
 
 #### | 算法相关

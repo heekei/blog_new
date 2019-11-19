@@ -2,7 +2,7 @@
 
 home: true
 sidebarDepth: 2
-heroImage: /hd-img.jpg
+heroImage: /base/hd-img.jpg
 actionText: 进入博客 →
 actionLink: /skills/
 features:
