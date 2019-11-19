@@ -1,14 +1,14 @@
 {
-  "name": "Lorainwings",
+  "name": "Lorainwings的主页",
   "short_name": "Lorainwings",
-  "start_url": "index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#2196f3",
   "description": "Lorain's个人主页",
   "theme_color": "blue",
   "icons": [
     {
-      "src": "/hd-img.jpg",
+      "src": "/base/hd-img.jpg",
       "sizes": "144x144",
       "type": "image/jpg"
     }
