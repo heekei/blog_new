@@ -17,11 +17,9 @@
 - [前端安全防范](/skills/前端安全防范/)
 - [Set 和 Map 总结](/skills/Set和Map总结/)
 
-
 #### | 算法相关
 
-- [关于 base64](/algorithm/递归算法/)
-
+- [递归算法](/algorithm/递归算法/)
 
 #### | 记录生活
 
