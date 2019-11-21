@@ -86,5 +86,8 @@ module.exports = {
       serviceWorker: true,
       updatePopup: true
     }],
+    ['@vuepress/last-updated', {
+      transformer: (timestamp, lang) => new Date(timestamp).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
+    }]
   ]
 };
