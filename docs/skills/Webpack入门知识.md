@@ -673,7 +673,7 @@ module.exports = {
 
   chunkhash 只能用于生产环境, 而 hash 一般用于开发环境,因为 chunkhash 与 HMR 冲突
 
-## Git 提交钩子(husky 和 yorkie
+## Git 提交钩子(husky 和 yorkie)
 
 husky 和 yorkie 都是提交钩子, 两者区别参考[原文地址](https://segmentfault.com/a/1190000016750078)
 
