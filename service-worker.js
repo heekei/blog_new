@@ -27,15 +27,15 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "23f5aee057ece3beb4aeb7ac42722691"
+    "revision": "cc0dbec68d8c15da3ce565a02c6906c8"
   },
   {
     "url": "algorithm/index.html",
-    "revision": "b3c5903acf0b0be7cc5c2fad928417cd"
+    "revision": "cb81f4dde224030e3bff5c5bd783f5aa"
   },
   {
     "url": "algorithm/递归算法.html",
-    "revision": "f821fdf234f6daedddfac10c1ec719ad"
+    "revision": "46bed951344ac1e64c8d86bd1b8d373d"
   },
   {
     "url": "assets/css/0.styles.a9382155.css",
@@ -98,16 +98,16 @@ self.__precacheManifest = [
     "revision": "bcd640de2bd17d1a81c27248a26e7681"
   },
   {
-    "url": "assets/js/22.f7601492.js",
-    "revision": "ab1939db51e4b0d2f91f15304f3e9f63"
+    "url": "assets/js/22.04139bfe.js",
+    "revision": "7a82efe5b72e7d9328bd2b4f37eabce3"
   },
   {
-    "url": "assets/js/23.924b9424.js",
-    "revision": "53f5d62b738a5b90e1959eb1dbb098a3"
+    "url": "assets/js/23.7a78b71a.js",
+    "revision": "f64920ab0493488ec91d97579f26515b"
   },
   {
-    "url": "assets/js/24.e11092e9.js",
-    "revision": "22e1861fbfc05bcc91f5cb5064e551b5"
+    "url": "assets/js/24.38f7a97d.js",
+    "revision": "306d5f7351f98130f28687f661a043c9"
   },
   {
     "url": "assets/js/25.4ef60b97.js",
@@ -126,24 +126,24 @@ self.__precacheManifest = [
     "revision": "1f86f27ba5817f38b109d5ad16d34e01"
   },
   {
-    "url": "assets/js/6.b5111fb8.js",
-    "revision": "7bfaee9d1e18b94d59343c9cb716b9b4"
+    "url": "assets/js/6.fbff64ad.js",
+    "revision": "4f48bb1bb0719341977dd51b260f86ef"
   },
   {
-    "url": "assets/js/7.274b47af.js",
-    "revision": "315d54ea56dc6b0607e86277d35a82f1"
+    "url": "assets/js/7.e0e6397b.js",
+    "revision": "db0250f24dddcb24ab1e5f34757754e7"
   },
   {
-    "url": "assets/js/8.a24b0d48.js",
-    "revision": "419e0ce6d155a5cd8974c4fdd91bd104"
+    "url": "assets/js/8.84611788.js",
+    "revision": "f43402572b5d122c425eed4a175be7fb"
   },
   {
-    "url": "assets/js/9.2fd2005b.js",
-    "revision": "f36b6e1660dcd4cc452bd5504d812893"
+    "url": "assets/js/9.54a746ab.js",
+    "revision": "22146865671386111cb8a68f53ed1588"
   },
   {
-    "url": "assets/js/app.9f9653a5.js",
-    "revision": "6d644e5980fc9c328de7c073990f77af"
+    "url": "assets/js/app.ff00019a.js",
+    "revision": "fe3b89b84aeda791c2b400e2a9968a82"
   },
   {
     "url": "base/hd-img.jpg",
@@ -151,7 +151,7 @@ self.__precacheManifest = [
   },
   {
     "url": "guide.html",
-    "revision": "92a8e6a7e2ccd9a73414b2dcade817a7"
+    "revision": "ccfa06e523e8dfc6d00832fadca964ca"
   },
   {
     "url": "icons/icon-144.png",
@@ -175,11 +175,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "1adb66933c484c5137c9e331207234aa"
+    "revision": "043f47f454835170346c04f6d193bb05"
   },
   {
     "url": "life/index.html",
-    "revision": "86710ffa8123396cf7e7a45749e1322c"
+    "revision": "e09a2a55fc4ebd358b783e3d502c21e5"
   },
   {
     "url": "skills/babel.jpg",
@@ -187,11 +187,11 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Babel总结.html",
-    "revision": "18ba1cf973c92de046da6ea24a11e4f1"
+    "revision": "4c6a1c37ab6c52e7aa6924379a963d07"
   },
   {
     "url": "skills/Base64.html",
-    "revision": "6a2af3b344f0df40e699ce5a8e3ae93f"
+    "revision": "2407d945f143cbd879e2b63f2c39d104"
   },
   {
     "url": "skills/cdn.png",
@@ -199,7 +199,7 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Docker.html",
-    "revision": "c4e87f9df8055f016a9701e4b5321965"
+    "revision": "cf79afde23c3f2cb865308c3bd3f9d4d"
   },
   {
     "url": "skills/event-loop-1.gif",
@@ -219,7 +219,7 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Event-loop.html",
-    "revision": "dd58fe091a5125c3a9baeda8dcb364d7"
+    "revision": "d5dca5658be4d8faea4f499be696db9a"
   },
   {
     "url": "skills/event-loop.png",
@@ -231,43 +231,43 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Git中~和^的区别.html",
-    "revision": "54f67f981b2e6f79c04161911716f8d6"
+    "revision": "9e79988aae5773b49f78f62574a5e675"
   },
   {
     "url": "skills/index.html",
-    "revision": "30b56050cc7aee82ae2868ea40dcb30e"
+    "revision": "ab62cbd81866c9afe9e7afac93fa79af"
   },
   {
     "url": "skills/Promise.html",
-    "revision": "fb9ad6d86777447293fc7d800a9e23f1"
+    "revision": "429795c05ca4af588c423e75be7b4ed8"
   },
   {
     "url": "skills/Rxjs初探.html",
-    "revision": "6caac1bd3025b637ed8e635d7e06de76"
+    "revision": "2f6da984e9c1f3cae54c89576a8fa537"
   },
   {
     "url": "skills/Set和Map总结.html",
-    "revision": "6bd7b0c133b713b8dbf8572c0ec30bb6"
+    "revision": "9788e5cb4795928e79fc0735555c2c9b"
   },
   {
     "url": "skills/Webpack入门知识.html",
-    "revision": "69cc8c4a2df1c9a6c69ed662988a4ab4"
+    "revision": "39fe5f5138f83a3273397f42fee3fe87"
   },
   {
     "url": "skills/Webpack模块加载.html",
-    "revision": "09c410fd6c2700a3935804ff2c1cadd3"
+    "revision": "0c08724ab11182a782f55cc115c23b86"
   },
   {
     "url": "skills/Web性能请求优化.html",
-    "revision": "dc33eac07681a6f856d819a2dfbcce36"
+    "revision": "618c11924098cf476879436c757c7a49"
   },
   {
     "url": "skills/前端安全防范.html",
-    "revision": "c366a709ed0b8d48787078983135c981"
+    "revision": "6532b85e9dd09f5599144a6eb7c9afa4"
   },
   {
     "url": "skills/浏览器缓存.html",
-    "revision": "b35eca5b16ea15705dc69e334c4f88b1"
+    "revision": "73e86070bf6c32e2f924b76e85d3b145"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
