@@ -51,7 +51,8 @@ module.exports = {
           'git中~和^的用法分析',
           '浏览器缓存',
           '前端安全防范',
-          'Set和Map总结'
+          'Set和Map总结',
+          'Web性能请求优化'
         ]),
         genSidebar('Html5', []),
         genSidebar('Linux相关', [

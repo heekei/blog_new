@@ -16,6 +16,7 @@
 - [浏览器缓存](/skills/浏览器缓存/)
 - [前端安全防范](/skills/前端安全防范/)
 - [Set 和 Map 总结](/skills/Set和Map总结/)
+- [Web 性能请求优化](/skills/Web性能请求优化/)
 
 #### | 算法相关
 
