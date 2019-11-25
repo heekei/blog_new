@@ -52,7 +52,8 @@ module.exports = {
           '浏览器缓存',
           '前端安全防范',
           'Set和Map总结',
-          'Web性能请求优化'
+          'Web性能请求优化',
+          '简易打包工具实现'
         ]),
         genSidebar('Html5', []),
         genSidebar('Linux相关', [
