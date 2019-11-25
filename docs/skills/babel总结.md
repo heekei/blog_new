@@ -1,8 +1,8 @@
-## Babel 知识点总结
+# Babel 总结
 
 ---
 
-### Babel 的几个模块
+## Babel 包 的核心模块
 
 1.  #### babel-core
 
@@ -41,14 +41,14 @@
       ```js
       // register.js 引入 babel-register，并配置。然后引入要执行代码的入口文件
 
-      require('babel-register')({ presets: ['react'] })
-      require('./test')
+      require('babel-register')({ presets: ['react'] });
+      require('./test');
       // test.js 这个文件是 jsx...
-      const React = require('react')
+      const React = require('react');
       const elements = [1, 2, 3].map(item => {
-        return <div>{item}</div>
-      })
-      console.log(elements)
+        return <div>{item}</div>;
+      });
+      console.log(elements);
       ```
 
       ```
@@ -57,7 +57,7 @@
 
     - babel-external-helps
 
-      主要用来生成一段代码，包含 babel 所有的 helper 辅助函数, 如果使用了 transform-runtime 模块,就不需要该  单独生成该 helps 了
+      主要用来生成一段代码，包含 babel 所有的 helper 辅助函数, 如果使用了 transform-runtime 模块,就不需要该 单独生成该 helps 了
 
       生成方法:
 
@@ -86,14 +86,14 @@
       > 4. 入口文件引入 helpers.js
 
       ```js
-      require('./helpers.js')
+      require('./helpers.js');
       ```
 
 3.  #### babel-runtime
 
     babel-runtime 中主要包括,注意使用中需要引入到 dependencis 中:
 
-    > 核心库 core（主要的语法  转换实现）
+    > 核心库 core（主要的语法 转换实现）
 
     > 辅助函数 helps（调用中间转换的辅助函数）
 
@@ -144,9 +144,9 @@
 
 ---
 
-### Babel presets 和 plugin 的结合使用
+## Babel presets 和 plugin 的结合使用
 
-1.  现在  主要分为 env+polyfill+useBuiltIns+helps 和 env+transform-runtime 两套方案
+1.  现在 主要分为 env+polyfill+useBuiltIns+helps 和 env+transform-runtime 两套方案
 
     配置分别为:
 
@@ -238,7 +238,9 @@
 
 ---
 
-### Babel/runtime 和 balbel/plugin-transform-runtime 和 babel-polyfill 的区别
+## runtime & plugin-transform-runtime & babel-polyfill 的区别
+
+Babel/runtime 和 balbel/plugin-transform-runtime 和 babel-polyfill 的区别
 
 1. babel-polyfill
 
@@ -287,20 +289,20 @@
            modules: false, //默认 可省略
            useBuiltIns: false, //默认 可省略
            targets: 'ie >= 8', // 可省略 不写该字段将以.browselist为准
-           corejs: false,
-         },
-       ],
+           corejs: false
+         }
+       ]
      ],
      plugins: [
        [
          '@babel/plugin-transform-runtime',
          {
            corejs: 3,
-           useESModules: true,
-         },
-       ],
-     ],
-   }
+           useESModules: true
+         }
+       ]
+     ]
+   };
    ```
 
 6. @babel/runtime @babel/runtime-corejs2 以及@babel/runtime-corejs3 的区别
@@ -317,7 +319,7 @@
 
 ---
 
-### [Npm-scope](https://docs.npmjs.com/misc/scope)
+## [Npm-scope](https://docs.npmjs.com/misc/scope)
 
 npm-scope 的作用:
 

@@ -41,14 +41,14 @@ module.exports = {
     sidebar: {
       '/skills/': [
         genSidebar('技术进阶', [
-          'promise',
-          'base64',
-          'babel总结',
-          'rxjs初探',
-          'webpack学习',
-          'webpack模块实现',
-          'event-loop',
-          'git中~和^的用法分析',
+          'Promise',
+          'Base64',
+          'Babel总结',
+          'Rxjs初探',
+          'Webpack入门知识',
+          'Webpack模块加载',
+          'Event-loop',
+          'Git中~和^的区别',
           '浏览器缓存',
           '前端安全防范',
           'Set和Map总结',
@@ -56,7 +56,7 @@ module.exports = {
         ]),
         genSidebar('Html5', []),
         genSidebar('Linux相关', [
-          'docker',
+          'Docker',
         ])
       ],
       '/algorithm/': [

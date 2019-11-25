@@ -1,6 +1,6 @@
-## RxJS 学习笔记
+# RxJS 学习笔记
 
-### 一. 认识 RxJS
+## 认识 RxJS
 
 1.  异步编程常见问题:
 
@@ -17,24 +17,24 @@
     ```js
     var handler = e => {
       console.log(e);
-      document.body.removeEventListener("click", handler); // 结束监听
+      document.body.removeEventListener('click', handler); // 结束监听
     };
 
     // 注册监听
-    document.body.addEventListener("click", handler);
+    document.body.addEventListener('click', handler);
     ```
 
     RxJS 实现:
 
     ```js
-    Rx.Observable.fromEvent(document.body, "click")
+    Rx.Observable.fromEvent(document.body, 'click')
       .take(1) // 只取一次
       .subscribe(console.log);
     ```
 
 2.  RxJs 介绍:
 
-    RxJS 是指 Functional Programming(FP) 及 Reactive Programming(RP) 两个编程思想的结合,  也被称为 Functional Reactive Programming(FRP)。
+    RxJS 是指 Functional Programming(FP) 及 Reactive Programming(RP) 两个编程思想的结合, 也被称为 Functional Reactive Programming(FRP)。
 
     FP、RP、FRP 都是编程的一种方式,类似于 OOP
 
@@ -89,7 +89,7 @@
       }
 
       // 找数组中 'b' 的 index
-      findIndex(["a", "b"], x => x === "b");
+      findIndex(['a', 'b'], x => x === 'b');
 
       /*
       这里我们写了一个 findIndex 用来找数组中的元素位置，我们在 findIndex 中故意多塞了一个参数用来保存当前找到第几个 index 的状态，这就是利用参数保存状态！
@@ -98,7 +98,7 @@
 
 ---
 
-### 二.建立 Observable
+## 建立 Observable
 
 1.  建立
 
@@ -112,8 +112,8 @@
 
     ```js
     var observable = Rx.Observable.create(function subscribe(observer) {
-      observer.next("Jerry"); // RxJS 4.x 以前的版本用 onNext
-      observer.next("Anna");
+      observer.next('Jerry'); // RxJS 4.x 以前的版本用 onNext
+      observer.next('Anna');
     });
     ```
 
@@ -150,13 +150,13 @@
      当我们想要同步的传递几个值时，就可以用 of 这个 operator 来简洁的表达!
 
      ```js
-     var source$ = Rx.Observable.of("Anna", "Jerry");
+     var source$ = Rx.Observable.of('Anna', 'Jerry');
      source$.subscribe({
        next(value) {
          console.log(value);
        },
        complete() {
-         console.log("complete");
+         console.log('complete');
        },
        error(error) {
          console.log(error);
@@ -172,3 +172,5 @@
    - throw
    - interval
    - timer
+
+## 未完待续

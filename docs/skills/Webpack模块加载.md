@@ -1,8 +1,8 @@
-## webpack 模块加载的实现
+# webpack 模块加载
 
 ---
 
-### 1. 先将原模块进行包装 
+## 原模块包装
 
 > #### 原模块
 
@@ -22,20 +22,20 @@ module.exports = {
 
 ```js
 //app.js
-var mA = require("./mA.js");
+var mA = require('./mA.js');
 
-console.log("mA.aa =" + mA.aa);
+console.log('mA.aa =' + mA.aa);
 mA.inc();
 ```
 
 > #### webpack 模块包装(建立映射表)
 
-  经过  包装过后的模块, module 被替换成 webpack 内部的一个新变量(或者缓存),export 变成该模块中的一个变量{}
+经过 包装过后的模块, module 被替换成 webpack 内部的一个新变量(或者缓存),export 变成该模块中的一个变量{}
 
 ```js
 var modules = {
-  "./mA.js": generated_mA,
-  "./app.js": generated_app
+  './mA.js': generated_mA,
+  './app.js': generated_app
 };
 
 function generated_mA(module, exports, webpack_require) {
@@ -52,16 +52,16 @@ function generated_mA(module, exports, webpack_require) {
 }
 
 function generated_app(module, exports, webpack_require) {
-  var mA_imported_module = webpack_require("./mA.js");
+  var mA_imported_module = webpack_require('./mA.js');
 
-  console.log("mA.aa =" + mA_imported_module["aa"]);
-  mA_imported_module["inc"]();
+  console.log('mA.aa =' + mA_imported_module['aa']);
+  mA_imported_module['inc']();
 }
 ```
 
 ---
 
-### 2. 模块加载器 
+## 模块加载
 
 ```js
 (function(modules) {
