@@ -12,7 +12,7 @@
 - [Webpack 入门知识](/skills/Webpack入门知识/)
 - [Webpack 模块加载](/skills/Webpack模块加载/)
 - [Event-loop](/skills/Event-loop/)
-- [Git 中~和^的区别](/skills/Git中\~和\^的区别/)
+- [Git 中~和^的区别](/skills/Git中~和^的区别/)
 - [浏览器缓存](/skills/浏览器缓存/)
 - [前端安全防范](/skills/前端安全防范/)
 - [Set 和 Map 总结](/skills/Set和Map总结/)
