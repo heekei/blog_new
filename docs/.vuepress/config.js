@@ -9,7 +9,7 @@ const genSidebar = (title, children) => {
 }
 
 module.exports = {
-  title: 'Lorain\'s个人主页',
+  title: 'Heekei\'s个人主页',
   description: '记录技术&生活',
   locales: {
     '/': {
@@ -27,7 +27,7 @@ module.exports = {
     ['meta', { 'http-quiv': 'expires', cotent: '0' }]
   ],
   serviceWorker: true, // 是否开启 PWA
-  base: '/blog/', // 部署到github相关的配置
+  base: '/blog_new/', // 部署到github相关的配置
   markdown: {
     lineNumbers: true // 代码块是否显示行号
   },
@@ -36,7 +36,7 @@ module.exports = {
       { text: '记录技术', link: '/skills/' },
       { text: '算法相关', link: '/algorithm/' },
       { text: '热爱生活', link: '/life/' },
-      { text: 'Github', link: 'https://github.com/lorainwings', target: '_blank', rel: '' }
+      { text: 'Github', link: 'https://github.com/heekei', target: '_blank', rel: '' }
     ],
     sidebar: {
       '/skills/': [
