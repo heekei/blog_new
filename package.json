@@ -1,5 +1,5 @@
 {
-  "name": "lorainwings-blog",
+  "name": "heekei-blog",
   "version": "1.0.0",
   "description": "个人主页",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "commit": "export ALL_PROXY=socks5://127.0.0.1:1080 && git add . && echo '请输入提交信息:' && read log &&  git cm -m $log && git push origin master"
   },
   "keywords": [],
-  "author": "lorain",
+  "author": "Heekei",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
@@ -42,10 +42,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lorainwings/blog.git"
+    "url": "git+https://github.com/heekei/blog_new.git"
   },
   "bugs": {
-    "url": "https://github.com/lorainwings/blog/issues"
+    "url": "https://github.com/heekei/blog_new/issues"
   },
-  "homepage": "https://github.com/lorainwings/blog/#readme"
+  "homepage": "https://github.com/heekei/blog_new/#readme"
 }

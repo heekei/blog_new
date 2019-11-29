@@ -6,7 +6,7 @@
 
 先贴图:
 
-![avatr](/blog/skills/git-head.png)
+![avatr](/blog/technology/git-head.png)
 
 ## Git Commit Log
 
