@@ -14,6 +14,6 @@ features:
 - title: 记录生活
   details: 记录生活,充实每一天,回首过去的抑或瞻望未来的。
 
-footer: MIT Licensed | Copyright © 2019-present Lorainwings
+footer: MIT Licensed | Copyright © 2019-present Heekei
 
 ---
