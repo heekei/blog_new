@@ -27,15 +27,15 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "d7b397c5df01dba63de9cbea4496635b"
+    "revision": "80e4fa43f051ebec90973aeeab2e9d6f"
   },
   {
     "url": "algorithm/index.html",
-    "revision": "541d1ca43535113683c682c4481252bf"
+    "revision": "225e2e5444762cedee00fe769b1158d5"
   },
   {
     "url": "algorithm/递归算法.html",
-    "revision": "83fe09553f2774103c37dfeb6d553de7"
+    "revision": "18441a3292460a0c073c584a79c54944"
   },
   {
     "url": "assets/css/0.styles.741ccdbb.css",
@@ -150,8 +150,8 @@ self.__precacheManifest = [
     "revision": "1411c5c3672b40506b63e2886a971df7"
   },
   {
-    "url": "assets/js/app.bb3fc240.js",
-    "revision": "15936acff1020c3819f58d2d3e40d0d4"
+    "url": "assets/js/app.e8f106c4.js",
+    "revision": "88c54cc6b73bce190615490b898fa9dd"
   },
   {
     "url": "base/hd-img.jpg",
@@ -159,7 +159,7 @@ self.__precacheManifest = [
   },
   {
     "url": "guide.html",
-    "revision": "a5ab898d2730f1f1cb08719c322c04d3"
+    "revision": "10cbcb0b16a82bdfba86d4a8c8198f18"
   },
   {
     "url": "icons/icon-144.png",
@@ -183,11 +183,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "0cd00ee70b33b2ae87224dcc6fae77ee"
+    "revision": "23dd89d32f4b835fe8e3ad537e3104be"
   },
   {
     "url": "life/index.html",
-    "revision": "839b11db7447633feeefceb36ba4cf50"
+    "revision": "17918c61bea9f83a99755b5de4c67319"
   },
   {
     "url": "skills/babel.jpg",
@@ -195,11 +195,11 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Babel总结.html",
-    "revision": "d23316e4365d6a6e6ce0252ffc0b4e09"
+    "revision": "0af18f51011abcfb678da4b6ee1858ce"
   },
   {
     "url": "skills/Base64.html",
-    "revision": "25fffbaf6acd19e970457b5e1cf6f0a9"
+    "revision": "c061c8004e8d4fa93292323b22eb04fe"
   },
   {
     "url": "skills/cdn.png",
@@ -207,7 +207,7 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Docker.html",
-    "revision": "a97ee88ef5cff2fb1ff036c531c96843"
+    "revision": "89f24f470622d8689ea581e506d67997"
   },
   {
     "url": "skills/event-loop-1.gif",
@@ -227,7 +227,7 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Event-loop.html",
-    "revision": "2cd3d38bebd575bba1b052ba1126aef1"
+    "revision": "f33d3fab1cb153141fe82f3dab1aaf0d"
   },
   {
     "url": "skills/event-loop.png",
@@ -239,51 +239,51 @@ self.__precacheManifest = [
   },
   {
     "url": "skills/Git中~和^的区别.html",
-    "revision": "683eab086e7e7693e86123bb42d6dcda"
+    "revision": "5354093aa73baeb5f84aad9f8c529db7"
   },
   {
     "url": "skills/index.html",
-    "revision": "289e80359340ef0654ce1be99d9edae1"
+    "revision": "cd783452244d78cf721009eb10597edb"
   },
   {
     "url": "skills/Promise.html",
-    "revision": "fbaeb5cecc6e164903e0a6e817ba9abe"
+    "revision": "f35f73db6ed5fecc5ff8cd40c1a6cf81"
   },
   {
     "url": "skills/Rxjs初探.html",
-    "revision": "a76f78fba9e2f44f8fd8f1f06ee4aa2d"
+    "revision": "015f0ce6f02fec95cde7e9455594347d"
   },
   {
     "url": "skills/Set和Map总结.html",
-    "revision": "40589e2a25f6944fc215b19ab46c9f92"
+    "revision": "5fe9a83d0bca93f3ce713878a4d8f62d"
   },
   {
     "url": "skills/Webpack入门知识.html",
-    "revision": "3f3480589775a63e8c3d560c6508fcbf"
+    "revision": "b64082b5604bbd115519f54904326599"
   },
   {
     "url": "skills/Webpack模块加载.html",
-    "revision": "096cad2e8ba7430b3afaa5c7f80788e1"
+    "revision": "d7b56386b1b4ecb8bedd7166693320cf"
   },
   {
     "url": "skills/Web性能请求优化.html",
-    "revision": "107ec16a6dc22f75033c4ec0fc81d88b"
+    "revision": "c8b7799683afbe72b425dc71e7558581"
   },
   {
     "url": "skills/前端安全防范.html",
-    "revision": "b78ede70f1d4428af9e357f5dd8a288d"
+    "revision": "a7f3b5503056f729db3a931e3fcee05d"
   },
   {
     "url": "skills/服务器推送.html",
-    "revision": "6eb191ecf0fcd235b12c9ed460172e62"
+    "revision": "889f94153ee172e3379fa9518b59fd71"
   },
   {
     "url": "skills/浏览器缓存.html",
-    "revision": "7e1cbc7495ae947f329f4468df77bbb9"
+    "revision": "adf35fb7f5b4e546b700a43658ed3e90"
   },
   {
     "url": "skills/简易打包工具实现.html",
-    "revision": "cac5e777bd2e7a77e1eca8f76adf880c"
+    "revision": "30a0868e725f57b1fb4dc373f10cec57"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
