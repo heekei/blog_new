@@ -1,15 +1,50 @@
-const genSidebar = (title, children) => {
+const fs = require('fs');
+const path = require('path')
+const genSidebarItem = (title, children, path) => {
   return {
     title,
     // collapsable: false,
+    // sidebarDepth:3,
+    path,
     children: [
       ...children
     ]
   }
 }
+const genSidebar = (excludes = ['README.md', '.vuepress']) => {
+  const res = {};
+  const root = './docs'
+  fs.readdirSync(root).map(fn => {
+    const _path = path.join('.', root, fn).toString();
+    const stat = fs.lstatSync(_path);
+    if (excludes.includes(fn)) return;
+    if (stat.isDirectory()) {
+      res[`/${fn}/`] = genCates(_path);
+    }
+  })
+  return res;
+};
+const genCates = (parent/*  = './docs' */, excludes = ['README.md', '.vuepress']) => {
+  // const root = parent || './docs'
+  const res = []
+  fs.readdirSync(parent).map(fn => {
+    const _path = path.join(parent, fn).toString();
+    const stat = fs.lstatSync(_path);
+    if (excludes.includes(fn)) return;
+    if (stat.isDirectory()) {
+      res.push(genSidebarItem(fn, genCates(_path)))
+    } else {
+      const fname = fn.slice(0, -3);
+      res.push(genSidebarItem(fname, [], _path.slice(4).slice(0, -3)))
+    }
+  })
+  return res;
+}
+const r = genSidebar();
+console.log(JSON.stringify(r, null, 2));
 
 module.exports = {
-  title: 'Heekei\'s个人主页',
+  title: '我是阿庄啊',
   description: '记录技术&生活',
   locales: {
     '/': {
@@ -17,7 +52,7 @@ module.exports = {
     }
   },
   head: [ // 注入到当前页面的 HTML <head> 中的标签
-    ['link', { rel: 'icon', href: '/base/hd-img.jpg' }],
+    // ['link', { rel: 'icon', href: '/base/hd-img.jpg' }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['link', { rel: 'apple-touch-icon', href: '/base/hd-img.jpg' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
@@ -33,46 +68,12 @@ module.exports = {
   },
   themeConfig: {
     nav: [ // 导航栏配置
-      { text: '记录技术', link: '/skills/' },
-      { text: '算法相关', link: '/algorithm/' },
-      { text: '热爱生活', link: '/life/' },
+      { text: '技术相关', link: '/technology/' },
+      // { text: '算法相关', link: '/algorithm/' },
+      { text: '生活相关', link: '/life/' },
       { text: 'Github', link: 'https://github.com/heekei', target: '_blank', rel: '' }
     ],
-    sidebar: {
-      '/skills/': [
-        genSidebar('技术进阶', [
-          'Promise',
-          'Base64',
-          'Rxjs初探',
-          'Babel总结',
-          '服务器推送',
-          '浏览器缓存',
-          '前端安全防范',
-          'Event-loop',
-          'Set和Map总结',
-          'Web性能请求优化',
-          '简易打包工具实现',
-          'Git中~和^的区别',
-          'Webpack入门知识',
-          'Webpack模块加载',
-        ]),
-        genSidebar('Html5', []),
-        genSidebar('Linux相关', [
-          'Docker',
-        ])
-      ],
-      '/algorithm/': [
-        genSidebar('基础算法', [
-          '递归算法'
-        ]),
-        genSidebar('高级算法', []),
-      ],
-      '/life/': [
-        genSidebar('生活记录', []),
-        genSidebar('名人语录', []),
-        genSidebar('诗词歌赋', []),
-      ]
-    },
+    sidebar: r,
     lastUpdated: '更新时间',
     smoothScroll: true,
     docsDir: "docs"
