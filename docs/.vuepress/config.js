@@ -73,7 +73,9 @@ module.exports = {
       ],
       '/life/': [
         genSidebar('生活记录', []),
-        genSidebar('名人语录', []),
+        genSidebar('名人语录', [
+          '意志力'
+        ]),
         genSidebar('诗词歌赋', []),
       ]
     },
