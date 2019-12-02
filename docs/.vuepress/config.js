@@ -33,14 +33,14 @@ module.exports = {
   },
   themeConfig: {
     nav: [ // 导航栏配置
-      { text: '记录技术', link: '/skills/' },
+      { text: '技术进阶', link: '/skills/' },
       { text: '算法相关', link: '/algorithm/' },
-      { text: '热爱生活', link: '/life/' },
+      { text: '生活杂类', link: '/life/' },
       { text: 'Github', link: 'https://github.com/lorainwings', target: '_blank', rel: '' }
     ],
     sidebar: {
       '/skills/': [
-        genSidebar('技术进阶', [
+        genSidebar('基础技术', [
           'Promise',
           'Base64',
           'Rxjs初探',
@@ -56,7 +56,7 @@ module.exports = {
           'Webpack入门知识',
           'Webpack模块加载',
         ]),
-        genSidebar('Html5', []),
+        genSidebar('设计模式', []),
         genSidebar('Linux相关', [
           'Docker',
         ])
