@@ -1,4 +1,4 @@
-# Rxjs初探
+# Rxjs 初探
 
 ## 认识 RxJS
 

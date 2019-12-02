@@ -604,7 +604,7 @@ handleEvent(document.getElementById('world'), 'dbclick'); // 报错，event 不�
     exchange<string, number>(['name', 18]); // [18, 'name']
     ```
 
-4.  泛型约束(泛型 extends 接口): 保证类型的参数必须包含某属性等
+4.  泛型约束(泛型 extends 接口): 保证类型的参数必须包含某属性等
 
     - 通过接口约束
 
