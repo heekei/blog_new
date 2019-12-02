@@ -140,7 +140,7 @@
 
 6.  #### babel 模块总结
 
-    ![avatar](/blog/technology/babel.jpg)
+    ![avatar](/blog_new/technology/babel.jpg)
 
 ---
 
