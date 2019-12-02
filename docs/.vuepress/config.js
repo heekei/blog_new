@@ -47,6 +47,7 @@ module.exports = {
           'Babel总结',
           '服务器推送',
           '浏览器缓存',
+          'Ts知识总结',
           '前端安全防范',
           'Event-loop',
           'Set和Map总结',
@@ -56,7 +57,10 @@ module.exports = {
           'Webpack入门知识',
           'Webpack模块加载',
         ]),
-        genSidebar('设计模式', []),
+        genSidebar('设计模式', [
+          '简易依赖注入实现',
+          '发布订阅vs观察者模式'
+        ]),
         genSidebar('Linux相关', [
           'Docker',
         ])
