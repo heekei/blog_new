@@ -167,7 +167,7 @@ console.log(Add, Add(1, 2));
 复制代码;
 ```
 
-以上核心代码中，能让打包后的代码直接跑在浏览器中，是因为 webpack 通过\_\_webpack_require** 函数模拟了模块的加载（类似于 node 中的 require 语法），把定义的模块内容挂载到 module.exports 上。同时\_\_webpack_require**函数中也对模块缓存做了优化，防止模块二次重新加载，优化性能。
+以上核心代码中，能让打包后的代码直接跑在浏览器中，是因为 webpack 通过\_\_webpack_require**函数模拟了模块的加载（类似于 node 中的 require 语法），把定义的模块内容挂载到 module.exports 上。同时\_\_webpack_require**函数中也对模块缓存做了优化，防止模块二次重新加载，优化性能。
 
 再让我们看下 webpack 的源码：
 

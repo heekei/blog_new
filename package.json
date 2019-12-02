@@ -8,7 +8,7 @@
     "start": "vuepress dev docs",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "commit": "export ALL_PROXY=socks5://127.0.0.1:1080 && git add . && echo '请输入提交信息:' && read log &&  git cm -m $log && git push origin master"
+    "commit": "export ALL_PROXY=socks5://127.0.0.1:1080 && git add -A && echo '请输入提交信息:' && read log &&  git cm -m $log && git push origin master"
   },
   "keywords": [],
   "author": "lorain",
