@@ -55,7 +55,8 @@ module.exports = {
           '简易打包工具实现',
           'Git中~和^的区别',
           'Webpack入门知识',
-          'Webpack模块加载',
+          'Webpack模块实现',
+          'Webpack异步加载',
         ]),
         genSidebar('设计模式', [
           '简易依赖注入实现',
