@@ -300,6 +300,8 @@ module.exports = {
 
 ### 关于 corejs3 配置升级
 
+@babel/preset-env 提供转译 ES 新语法，剩下的事情（即 ES 的新 API）才是 @babel/polifill 或 @babel/runtime 需要去解决的事情
+
 **1.polyfill 垫片方案**
 
 在 web 应用中,满足全部垫片
@@ -353,7 +355,7 @@ module.exports = {
       '@babel/preset-env',
       {
         modules: false, //默认 可省略
-        useBuiltIns: 'usage', //默认 可省略
+        useBuiltIns: 'false', //默认 可省略  ==== 此处可以考虑设置为'usage'使打包体积更小
         targets: 'ie >= 8', // 可省略 不写该字段将以.browselist为准
         corejs: false
       }
