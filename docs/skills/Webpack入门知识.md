@@ -898,7 +898,7 @@ module.exports = {
 };
 ```
 
-## optimization
+## 核心选项 optimization
 
 optimization 包含了 webpack 关键的优化配置选项, 以下几个选项跟浏览器缓存息息相关, 此处做一个记录
 
@@ -977,6 +977,76 @@ optimization 包含了 webpack 关键的优化配置选项, 以下几个选项�
 - output 选项中的[hash]以及[chunkhash]
 
 > chunkhash 只能用于生产环境, 而 hash 一般用于开发环境,因为 chunkhash 与 HMR 冲突
+
+- runtime && manifest
+
+> **runtime**: 就是帮助 webpack 编译构建后的打包文件在浏览器运行的一些辅助代码段，换句话说，打包后的文件，除了你自己的源码和 npm 库外，还有 webpack 提供的一点辅助代码段
+
+> **manifest**: 则是 webpack 用以查找 chunk 真实路径所使用的一份关系表，简单来说，就是 chunk 名对应 chunk 路径的关系表
+
+## 注入全局变量
+
+注入全局变量可以使用三种途径来完成
+
+- ProvidePlugin
+
+- exposed-loader
+
+- imports-loader
+
+那他们有什么区别呢?
+
+### ProvidePlugin
+
+ProvidePlugin 用来自动加载模块，而不必到处 import 或 require
+
+它的机制是当 webpack 加载到某个 js 模块里，出现了未定义且名称符合（字符串完全匹配）配置中 key 的变量时，会自动 require 配置中 value 所指定的 js 模块
+
+```js
+new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery'
+});
+```
+
+### exposed-loader
+
+看名称可以知道这个一个暴露全局变量的 loader,当某个 js 模块显式地调用 `var $ = require('jquery')`的时候，就会把 window,jQuery 返回给它
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: require.resolve('jquery'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: '$'
+          }
+        ]
+      }
+    ]
+  }
+};
+```
+
+### imports-loader
+
+这个跟 providerPlugin 类似, 允许你使用一个全局变量的模块
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: require.resolve('some-module'),
+        use: 'imports-loader?this=>window'
+      }
+    ]
+  }
+};
+```
 
 ## Git 提交钩子(husky 和 yorkie)
 
