@@ -566,6 +566,40 @@ module.exports = {
       NODE_ENV: '"development"'
     }
   });
+
+  new webpack.DefinePlugin({
+    PRODUCTION: JSON.stringify(true),
+    VERSION: JSON.stringify('5fa3b9'),
+    BROWSER_SUPPORTS_HTML5: true,
+    TWO: '1+1',
+    'typeof window': JSON.stringify('object')
+  });
+  ```
+
+  `DefinePlugin`可能会被误认为其作用是在 webpack 配置文件中为编译后的代码上下文环境设置全局变量，但其实不然。
+
+  它真正的机制是：`DefinePlugin` 的参数是一个 object，那么其中会有一些 key-value 对。在 webpack 编译的时候，会把业务代码中没有定义（使用 `var/const/let` 来预定义的）而变量名又与 key 相同的变量（直接读代码的话的确像是全局变量）替换成 value。
+
+  例如上面的官方例子，PRODUCTION 就会被替换为 true；VERSION 就会被替换为'5fa3b9'（注意单引号）；BROWSER_SUPPORTS_HTML5 也是会被替换为 true；TWO 会被替换为 1+1（相当于是一个数学表达式）；typeof window 就被替换为'object'了。
+
+  再举个例子，比如你在代码里是这么写的：
+
+  ```js
+  if (!PRODUCTION) console.log('Debug info');
+  if (PRODUCTION) console.log('Production log');
+  ```
+
+  那么在编译生成的代码里就会是这样了：
+
+  ```js
+  if (!true) console.log('Debug info');
+  if (true) console.log('Production log');
+  ```
+
+  而如果你用了 UglifyJsPlugin，则会变成这样：
+
+  ```js
+  console.log('Production log');
   ```
 
 - terser-webpack-plugin
@@ -717,6 +751,27 @@ module.exports = {
       manifest: require('./dist/vendor-manifest.json')
     })
   ]
+};
+```
+
+- babel-loader 设置缓存
+
+> 设置 babel 的 cacheDirectory 为 true
+
+babel 编译代码的过程太慢了,不仅要使用 exclude、include，尽可能准确的指定要转化内容的范畴，而且要充分利用缓存，进一步提升性能。babel-loader 提供了 cacheDirectory 特定选项（默认 false）：设置时，给定的目录将用于缓存加载器的结果
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader?cacheDirectory=true',
+        exclude: /node_modules/,
+        include: [resolve('src'), resolve('test')]
+      }
+    ]
+  }
 };
 ```
 
@@ -898,6 +953,27 @@ module.exports = {
 };
 ```
 
+- 拷贝静态文件
+
+在前文 Webpack 打包优化之体积篇中提到，引入 DllPlugin 和 DllReferencePlugin 来提前构建一些第三方库，来优化 Webpack 打包。而在生产环境时，就需要将提前构建好的包，同步到 dist 中；这里拷贝静态文件，你可以使用 copy-webpack-plugin 插件：把指定文件夹下的文件复制到指定的目录；其配置如下：
+
+```js
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+module.exports = {
+  plugins: [
+    // ......
+    // copy custom static assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ])
+  ]
+};
+```
+
 ## 核心选项 optimization
 
 optimization 包含了 webpack 关键的优化配置选项, 以下几个选项跟浏览器缓存息息相关, 此处做一个记录
@@ -935,6 +1011,12 @@ optimization 包含了 webpack 关键的优化配置选项, 以下几个选项�
 ## 部分疑惑选项记录
 
 - include/exclude/test 的区别
+
+> ** test**：必须满足的条件（正则表达式，不要加引号，匹配要处理的文件）
+> ** exclude**：不能满足的条件（排除不处理的目录）
+> ** include**：导入的文件将由加载程序转换的路径或文件数组（把要处理的目录包括进来）
+> ** loader**：一串“！”分隔的装载机（2.0 版本以上，”-loader”不可以省略）
+> ** loaders**：作为字符串的装载器阵列
 
 ```js
     module.exports = {
@@ -992,8 +1074,6 @@ optimization 包含了 webpack 关键的优化配置选项, 以下几个选项�
 
 - exposed-loader
 
-- imports-loader
-
 那他们有什么区别呢?
 
 ### ProvidePlugin
@@ -1011,7 +1091,7 @@ new webpack.ProvidePlugin({
 
 ### exposed-loader
 
-看名称可以知道这个一个暴露全局变量的 loader,当某个 js 模块显式地调用 `var $ = require('jquery')`的时候，就会把 window,jQuery 返回给它
+看名称可以知道这个一个暴露全局变量的 loader,当某个 js 模块显式地调用 `import $ from 'jquery'`的时候，就会将\$注入到 window 中
 
 ```js
 module.exports = {
@@ -1029,24 +1109,21 @@ module.exports = {
     ]
   }
 };
+
+// 在应用代码中使用
+
+import $ from 'jquery';
+
+// 就能直接读取到window.$
 ```
 
-### imports-loader
+::: tip 提示
+html 已经通过 script 引入了一些外部 CDN 模块(例如 `vue.min.js`), 在代码中就不要再次引入
 
-这个跟 providerPlugin 类似, 允许你使用一个全局变量的模块
+`import Vue from 'vue'`
 
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: require.resolve('some-module'),
-        use: 'imports-loader?this=>window'
-      }
-    ]
-  }
-};
-```
+在 webpack 配置中, 使用 external 选项,将 Vue 给排除在外,以免引起模块多次打包,体积增大
+:::
 
 ## Git 提交钩子(husky 和 yorkie)
 
