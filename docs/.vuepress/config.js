@@ -43,7 +43,7 @@ module.exports = {
         genSidebar('基础技术', [
           'Promise',
           'Base64',
-          '图片知识归纳',
+          '图片分类',
           'Rxjs初探',
           'Babel总结',
           '服务器推送',
