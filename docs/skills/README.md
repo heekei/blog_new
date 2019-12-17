@@ -32,3 +32,4 @@
 #### | Linux 相关
 
 - [Docker](/skills/Docker/)
+- [查看日志命令](/skills/查看日志命令/)

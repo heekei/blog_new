@@ -65,6 +65,7 @@ module.exports = {
         ]),
         genSidebar('Linux相关', [
           'Docker',
+          '查看日志命令'
         ])
       ],
       '/algorithm/': [
