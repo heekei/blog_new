@@ -34,7 +34,7 @@
   },
   "lint-staged": {
     "docs/**/*.{md,markdown}": [
-      "yarn lint",
+      "npm run lint",
       "git add"
     ]
   },
