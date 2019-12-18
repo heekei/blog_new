@@ -1,4 +1,4 @@
-# RxJS 学习笔记
+# Rxjs 初探
 
 ## 认识 RxJS
 

@@ -1,5 +1,6 @@
-# Docker 总结：《Docker 从入门到实战(黄靖钧)》
+# Docker 总结
 
+> 来自《Docker 从入门到实战(黄靖钧)》
 
 # 观其大纲
 
@@ -142,23 +143,19 @@
 第 18 章 集群网络  
 第 19 章 Docker 安全
 
-* * *
-
+---
 
 # 熟知概念
 
 第 1 篇 容器技术与 Docker 概念  
 第 1 章 容器技术
 
-> *   什么是容器  
->     容器映像是一个软件的轻量级独立可执行软件包，包含运行它所需的一切：代码，运行时，系统工具，系统库，设置。不管环境如何，集装箱化软件都可以运行相同的 Linux 和 Windows 应用程序。容器将软件与其周围环境隔离开来，例如开发环境和登台环境之间的差异，并有助于减少在同一基础架构上运行不同软件的团队之间的冲突。
->     
->       
->     
->     ![](invalid-url.png)
->     
->     what is a container?
->     
+> - 什么是容器  
+>   容器映像是一个软件的轻量级独立可执行软件包，包含运行它所需的一切：代码，运行时，系统工具，系统库，设置。不管环境如何，集装箱化软件都可以运行相同的 Linux 和 Windows 应用程序。容器将软件与其周围环境隔离开来，例如开发环境和登台环境之间的差异，并有助于减少在同一基础架构上运行不同软件的团队之间的冲突。
+>
+>   ![](invalid-url.png)
+>
+>   what is a container?
 
 > LXC  
 > Linux Container 容器是一种内核虚拟化技术，可以提供轻量级的虚拟化，以便隔离进程和资源。
@@ -187,25 +184,22 @@
 
 > Docker 基本架构  
 > docker 主要有以下几部分组成：
-> 
+>
 > > Docker Client 客户端  
 > > Docker daemon 守护进程  
 > > Docker Image 镜像  
 > > Docker Container 容器  
 > > Docker Registry 仓库
 
-> *   客户端和守护进程：  
->     1 Docker 是 C/S（客户端 client-服务器 server）架构模式。  
->     docker 通过客户端连接守护进程，通过命令向守护进程发出请求，守护进程通过一系列的操作返回结果。  
->     2 docker 客户端可以连接本地或者远程的守护进程。  
->     3 docker 客户端和服务器通过 socket 或 RESTful API 进行通信。
->     
->       
->     
->     ![](invalid-url.png)
->     
->     docker 架构
->     
+> - 客户端和守护进程：  
+>   1 Docker 是 C/S（客户端 client-服务器 server）架构模式。  
+>   docker 通过客户端连接守护进程，通过命令向守护进程发出请求，守护进程通过一系列的操作返回结果。  
+>   2 docker 客户端可以连接本地或者远程的守护进程。  
+>   3 docker 客户端和服务器通过 socket 或 RESTful API 进行通信。
+>
+>   ![](invalid-url.png)
+>
+>   docker 架构
 
 第 3 章 安装 Docker
 
@@ -214,85 +208,85 @@
 
 ## 常用命令表
 
-> *   操作 命令  
->     实例
+> - 操作 命令  
+>   实例
 
 #### 通用命令
 
-*   查看 docker 版本 docker version  
-    docker version
-*   查看 docker 信息 docker info  
-    docker info
-*   查看某命令 help 信息 docker help \[command\]  
-    docker help attach
-*   查看 docker help 信息 docker --help  
-    docker --help
+- 查看 docker 版本 docker version  
+  docker version
+- 查看 docker 信息 docker info  
+  docker info
+- 查看某命令 help 信息 docker help \[command\]  
+  docker help attach
+- 查看 docker help 信息 docker --help  
+  docker --help
 
 #### 容器操作命令
 
-*   创建 container docker create  
-    docker create chenhengjie123/xwalkdriver
-*   创建并运行 container docker run  
-    docker run chenhengjie123/xwalkdriver /bin/bash
-*   创建并运行 container 后进入其 bash 控制台  
-    docker run -t -i image /bin/bash  
-    docker run -t -i ubuntu /bin/bash
-*   创建并运行 container 并让其在后台运行，并端口映射  
-    docker run -p \[port in container\]:\[port in physical system\] -d \[image\] \[command\]  
-    docker run -p 5000:5000 -d training/webapp python app.py
-*   查看正在运行的所有 container 信息 docker ps  
-    docker ps
-*   查看最后创建的 container docker ps -l  
-    docker ps -l
-*   查看所有 container ，包括正在运行和已经关闭的 docker ps -a  
-    docker ps -a
-*   输出指定 container 的 stdout 信息（用来看 log ，效果和 tail -f 类似，会实时输出。）  
-    docker logs -f \[container\]  
-    docker logs -f nostalgic_morse  
-    **补充 docker logs -f -t --since="2017-05-01" --tail=10 edu\_web\_01**
-*   获取 container 指定端口映射关系 docker port \[container\] \[port\]  
-    docker port nostalgic_morse 5000
-*   查看 container 进程列表 docker top \[container\]  
-    docker top nostalgic_morse
-*   查看 container 详细信息 docker inspect \[container\]  
-    docker inspect nostalgic_morse
-*   停止 continer docker stop \[container\]  
-    docker stop nostalgic_morse
-*   强制停止 container docker kill \[container\]  
-    docker kill nostalgic_morse
-*   启动一个已经停止的 container docker start \[container\]  
-    docker start nostalgic_morse
-*   重启 container (若 container 处于关闭状态，则直接启动)  
-    docker restart \[container\]  
-    docker restart nostalgic_morse
-*   删除 container docker rm \[container\]  
-    docker rm nostalgic_morse
+- 创建 container docker create  
+  docker create chenhengjie123/xwalkdriver
+- 创建并运行 container docker run  
+  docker run chenhengjie123/xwalkdriver /bin/bash
+- 创建并运行 container 后进入其 bash 控制台  
+  docker run -t -i image /bin/bash  
+  docker run -t -i ubuntu /bin/bash
+- 创建并运行 container 并让其在后台运行，并端口映射  
+  docker run -p \[port in container\]:\[port in physical system\] -d \[image\] \[command\]  
+  docker run -p 5000:5000 -d training/webapp python app.py
+- 查看正在运行的所有 container 信息 docker ps  
+  docker ps
+- 查看最后创建的 container docker ps -l  
+  docker ps -l
+- 查看所有 container ，包括正在运行和已经关闭的 docker ps -a  
+  docker ps -a
+- 输出指定 container 的 stdout 信息（用来看 log ，效果和 tail -f 类似，会实时输出。）  
+  docker logs -f \[container\]  
+  docker logs -f nostalgic_morse  
+  **补充 docker logs -f -t --since="2017-05-01" --tail=10 edu_web_01**
+- 获取 container 指定端口映射关系 docker port \[container\] \[port\]  
+  docker port nostalgic_morse 5000
+- 查看 container 进程列表 docker top \[container\]  
+  docker top nostalgic_morse
+- 查看 container 详细信息 docker inspect \[container\]  
+  docker inspect nostalgic_morse
+- 停止 continer docker stop \[container\]  
+  docker stop nostalgic_morse
+- 强制停止 container docker kill \[container\]  
+  docker kill nostalgic_morse
+- 启动一个已经停止的 container docker start \[container\]  
+  docker start nostalgic_morse
+- 重启 container (若 container 处于关闭状态，则直接启动)  
+  docker restart \[container\]  
+  docker restart nostalgic_morse
+- 删除 container docker rm \[container\]  
+  docker rm nostalgic_morse
 
 注意：命令中需要指定 container 时，既可使用其名称，也可使用其 id 。
 
 #### 镜像操作命令
 
-*   从 container 创建 image， docker commit \[container\] \[imageName\]  
-    docker commit nostalgic_morse ouruser/sinatra:v2
-*   从 Dockerfile 创建 image， docker build -t \[imageName\] \[pathToFolder\]  
-    docker build ouruser/sinatra:v3 .
-*   查看本地所有 image， docker images  
-    docker images
-*   显示镜像构建历史 docker history \[OPTIONS\] IMAGE  
-    docker history runoob/ubuntu:v3
-*   在 registry 中搜索镜像 docker search \[query\]  
-    docker search ubuntu
-*   从 registry 中获取镜像 （若无指定 tag 名称，则默认使用 latest 这个 tag）  
-    docker pull \[imageName\]  
-    docker pull ubuntu:14.04  
-    docker pull training/webapp
-*   给 image 打 tag， docker tag \[imageId\] \[imageName\]  
-    docker tag 5db5f8471261 ouruser/sinatra:devel
-*   把本地 image 上传到 registry 中 (此时会把所有 tag 都上传上去)  
-    docker push \[imageName\]  
-    docker push ouruser/sinatra
-*   删除本地 image， docker rmi \[image\]  
-    docker rmi training/sinatra
+- 从 container 创建 image， docker commit \[container\] \[imageName\]  
+  docker commit nostalgic_morse ouruser/sinatra:v2
+- 从 Dockerfile 创建 image， docker build -t \[imageName\] \[pathToFolder\]  
+  docker build ouruser/sinatra:v3 .
+- 查看本地所有 image， docker images  
+  docker images
+- 显示镜像构建历史 docker history \[OPTIONS\] IMAGE  
+  docker history runoob/ubuntu:v3
+- 在 registry 中搜索镜像 docker search \[query\]  
+  docker search ubuntu
+- 从 registry 中获取镜像 （若无指定 tag 名称，则默认使用 latest 这个 tag）  
+  docker pull \[imageName\]  
+  docker pull ubuntu:14.04  
+  docker pull training/webapp
+- 给 image 打 tag， docker tag \[imageId\] \[imageName\]  
+  docker tag 5db5f8471261 ouruser/sinatra:devel
+- 把本地 image 上传到 registry 中 (此时会把所有 tag 都上传上去)  
+  docker push \[imageName\]  
+  docker push ouruser/sinatra
+- 删除本地 image， docker rmi \[image\]  
+  docker rmi training/sinatra
 
 注意：注意：image 中没有指定 tag 名称的话默认使用 latest 这个 tag 。然而 latest 的含义和 VCS 中的 head 不一样，不是代表最新一个镜像，仅仅是代表 tag 名称为 latest 的镜像。若不存在 tag 名称为 latest 的镜像则会报错。
 
@@ -312,17 +306,16 @@
 
 ##### Docker 镜像中的 base 镜像理解
 
-*   base 镜像有两层含义：  
-    1 不依赖其他镜像，从 scratch 构建。  
-    2 其他镜像可以之为基础进行扩展。  
-    能称作 base 镜像的通常都是各种 Linux 发行版的 Docker 镜像，比如 Ubuntu, Debian, CentOS 等
-    
-*   base 镜像内容：  
-    下载镜像：  
-    docker pull centos  
-    查看镜像信息：docker images centos # 大约 200M  
-    Linux 操作系统由内核空间和用户空间组成。如下图所示：
-    
+- base 镜像有两层含义：  
+  1 不依赖其他镜像，从 scratch 构建。  
+  2 其他镜像可以之为基础进行扩展。  
+  能称作 base 镜像的通常都是各种 Linux 发行版的 Docker 镜像，比如 Ubuntu, Debian, CentOS 等
+
+- base 镜像内容：  
+  下载镜像：  
+  docker pull centos  
+  查看镜像信息：docker images centos # 大约 200M  
+  Linux 操作系统由内核空间和用户空间组成。如下图所示：
 
 ![](invalid-url.png)
 
@@ -330,11 +323,11 @@ linux 操作系统
 
 rootfs
 
-*   内核空间是 kernel，Linux 刚启动时会加载 bootfs 文件系统，之后 bootfs 会被卸载掉。
-*   用户空间的文件系统是 rootfs，包含我们熟悉的 /dev, /proc, /bin 等目录。对于 base 镜像来说，底层直接用 Host 的 kernel，自己只需要提供 rootfs 就行了。
-*   而对于一个精简的 OS，rootfs 可以很小，只需要包括最基本的命令、工具和程序库就可以了。相比其他 Linux 发行版，CentOS 的 rootfs 已经算臃肿的了，alpine 还不到 10MB。
-*   我们平时安装的 CentOS 除了 rootfs 还会选装很多软件、服务、图形桌面等，需要好几个 GB 就不足为奇了。
-*   base 镜像提供的是最小安装的 Linux 发行版。
+- 内核空间是 kernel，Linux 刚启动时会加载 bootfs 文件系统，之后 bootfs 会被卸载掉。
+- 用户空间的文件系统是 rootfs，包含我们熟悉的 /dev, /proc, /bin 等目录。对于 base 镜像来说，底层直接用 Host 的 kernel，自己只需要提供 rootfs 就行了。
+- 而对于一个精简的 OS，rootfs 可以很小，只需要包括最基本的命令、工具和程序库就可以了。相比其他 Linux 发行版，CentOS 的 rootfs 已经算臃肿的了，alpine 还不到 10MB。
+- 我们平时安装的 CentOS 除了 rootfs 还会选装很多软件、服务、图形桌面等，需要好几个 GB 就不足为奇了。
+- base 镜像提供的是最小安装的 Linux 发行版。
 
 > base 镜像----提供了一个基本的操作系统环境，用户可以根据需要安装和配置软件  
 > base 镜像通常是各种 Linux 发行版的 Docker 镜像比如 ubuntu、Debian、centos 等。  
@@ -343,43 +336,43 @@ rootfs
 5.2 创建镜像
 
 > 当运行容器时，使用的镜像如果在本地中不存在，docker 就会自动从 docker 镜像仓库中下载，默认是从 Docker Hub 公共镜像源下载。
-> 
-> *   列出镜像列表  
->     我们可以使用 docker images 来列出本地主机上的镜像。  
->     我们如果要使用版本为 15.10 的 ubuntu 系统镜像来运行容器时，命令如下：  
->     docker run -t -i ubuntu:15.10 /bin/bash
-> *   获取一个新的镜像  
->     当我们在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。如果我们想预先下载这个镜像，我们可以使用 docker pull 命令来下载它。  
->     docker pull ubuntu:13.10
-> *   查找镜像  
->     我们可以从 Docker Hub 网站来搜索镜像，Docker Hub 网址为： [https://hub.docker.com/](https://hub.docker.com/)  
->     我们也可以使用 docker search 命令来搜索镜像。比如我们需要一个 httpd 的镜像来作为我们的 web 服务。我们可以通过 docker search 命令搜索 httpd 来寻找适合我们的镜像。  
->     docker search httpd
-> *   创建镜像  
->     当我们从 docker 镜像仓库中下载的镜像不能满足我们的需求时，我们可以通过以下两种方式对镜像进行更改。  
->     1.从已经创建的容器中更新镜像，并且提交这个镜像  
->     2.使用 Dockerfile 指令来创建一个新的镜像
+>
+> - 列出镜像列表  
+>   我们可以使用 docker images 来列出本地主机上的镜像。  
+>   我们如果要使用版本为 15.10 的 ubuntu 系统镜像来运行容器时，命令如下：  
+>   docker run -t -i ubuntu:15.10 /bin/bash
+> - 获取一个新的镜像  
+>   当我们在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。如果我们想预先下载这个镜像，我们可以使用 docker pull 命令来下载它。  
+>   docker pull ubuntu:13.10
+> - 查找镜像  
+>   我们可以从 Docker Hub 网站来搜索镜像，Docker Hub 网址为： [https://hub.docker.com/](https://hub.docker.com/)  
+>   我们也可以使用 docker search 命令来搜索镜像。比如我们需要一个 httpd 的镜像来作为我们的 web 服务。我们可以通过 docker search 命令搜索 httpd 来寻找适合我们的镜像。  
+>   docker search httpd
+> - 创建镜像  
+>   当我们从 docker 镜像仓库中下载的镜像不能满足我们的需求时，我们可以通过以下两种方式对镜像进行更改。  
+>   1.从已经创建的容器中更新镜像，并且提交这个镜像  
+>   2.使用 Dockerfile 指令来创建一个新的镜像
 
-> *   更新镜像  
->     更新镜像之前，我们需要使用镜像来创建一个容器。  
->     docker run -t -i ubuntu:15.10 /bin/bash  
->     在运行的容器内使用命令进行更新:  
->     apt-get update  
->     在完成操作之后，输入 exit 命令来退出这个容器。  
->     此时 ID 为 e218edb10161 的容器，是按我们的需求更改的容器。我们可以通过命令 docker commit 来提交容器副本。  
->     docker commit -m="has update" -a="runoob" e218edb10161 runoob/ubuntu:v2
-> 
+> - 更新镜像  
+>   更新镜像之前，我们需要使用镜像来创建一个容器。  
+>   docker run -t -i ubuntu:15.10 /bin/bash  
+>   在运行的容器内使用命令进行更新:  
+>   apt-get update  
+>   在完成操作之后，输入 exit 命令来退出这个容器。  
+>   此时 ID 为 e218edb10161 的容器，是按我们的需求更改的容器。我们可以通过命令 docker commit 来提交容器副本。  
+>   docker commit -m="has update" -a="runoob" e218edb10161 runoob/ubuntu:v2
+>
 > > 各个参数说明：  
 > > -m:提交的描述信息  
 > > -a:指定镜像作者  
 > > e218edb10161：容器 ID  
 > > runoob/ubuntu:v2:指定要创建的目标镜像名
-> 
-> *   构建镜像  
->     我们使用命令 docker build ， 从零开始来创建一个新的镜像。为此，我们需要创建一个 Dockerfile 文件，其中包含一组指令来告诉 Docker 如何构建我们的镜像。
+>
+> - 构建镜像  
+>   我们使用命令 docker build ， 从零开始来创建一个新的镜像。为此，我们需要创建一个 Dockerfile 文件，其中包含一组指令来告诉 Docker 如何构建我们的镜像。
 
 ```bash
-runoob@runoob:~$ cat Dockerfile 
+runoob@runoob:~$ cat Dockerfile
 FROM    centos:6.7
 MAINTAINER      Fisher "fisher@sudops.com"
 
@@ -403,27 +396,27 @@ CMD     /usr/sbin/sshd -D
 > . Dockerfile 文件所在目录，可以指定 Dockerfile 的绝对路径  
 > 使用 docker images 查看创建的镜像
 
-> *   设置镜像标签  
->     我们可以使用 docker tag 命令，为镜像添加一个新的标签。  
->     docker tag 860c279d2fec runoob/centos:dev
+> - 设置镜像标签  
+>   我们可以使用 docker tag 命令，为镜像添加一个新的标签。  
+>   docker tag 860c279d2fec runoob/centos:dev
 
 5.3 导出和导入镜像
 
-*   将镜像导出到文件  
-    docker export cbe3cb7799ed > update.tar
-*   基于导出的文件创建一个新静像（导入镜像）  
-    docker import - update < update.tar  
-    新镜像为 update
-*   镜像的备份和恢复 save 和 load  
-    docker save -o update1.tar update  
-    备份， -o 输出到文件  
-    docker rmi update  
-    docker load < update1.tar  
-    恢复
+- 将镜像导出到文件  
+  docker export cbe3cb7799ed > update.tar
+- 基于导出的文件创建一个新静像（导入镜像）  
+  docker import - update < update.tar  
+  新镜像为 update
+- 镜像的备份和恢复 save 和 load  
+   docker save -o update1.tar update  
+   备份， -o 输出到文件  
+   docker rmi update  
+   docker load < update1.tar  
+   恢复
 
-5.4 发布镜像  
-5.5 删除镜像  
-5.6 Docker 镜像扩展
+  5.4 发布镜像  
+  5.5 删除镜像  
+  5.6 Docker 镜像扩展
 
 第 6 章 Dockerfile 文件  
 6.1 Dockerfile 基本结构  
@@ -436,7 +429,7 @@ From ubutu
 MAINTAINER docker_user  docker_user@mail.com
 #镜像的操作指令
 apt/sourcelist.list
-RUN apt-get update && apt-get install -y ngnix 
+RUN apt-get update && apt-get install -y ngnix
 RUN echo "\ndaemon off;">>/etc/ngnix/nignix.conf
 #容器启动时执行指令
 CMD /usr/sbin/ngnix
@@ -444,84 +437,82 @@ CMD /usr/sbin/ngnix
 
 6.2 Dockerfile 指令
 
-*   1、From 指令  
-    From 或者 From :  
-    DockerFile 第一条必须为 From 指令。如果同一个 DockerFile 创建多个镜像时，可使用多个 From 指令（每个镜像一次）
-*   2、MAINTAINER  
-    格式为 maintainer ，指定维护者的信息
-*   3、RUN  
-    格式为 Run 或者 Run \[“executable” ,”Param1”, “param2”\]  
-    前者在 shell 终端上运行，即/bin/sh -C，后者使用 exec 运行。例如：RUN \[“/bin/bash”, “-c”,”echo hello”\]  
-    每条 run 指令在当前基础镜像执行，并且提交新镜像。当命令比较长时，可以使用“/”换行。
+- 1、From 指令  
+  From 或者 From :  
+  DockerFile 第一条必须为 From 指令。如果同一个 DockerFile 创建多个镜像时，可使用多个 From 指令（每个镜像一次）
+- 2、MAINTAINER  
+  格式为 maintainer ，指定维护者的信息
+- 3、RUN  
+  格式为 Run 或者 Run \[“executable” ,”Param1”, “param2”\]  
+  前者在 shell 终端上运行，即/bin/sh -C，后者使用 exec 运行。例如：RUN \[“/bin/bash”, “-c”,”echo hello”\]  
+  每条 run 指令在当前基础镜像执行，并且提交新镜像。当命令比较长时，可以使用“/”换行。
 
 > > exec 命令用于调用并执行指令的命令。exec 命令通常用在 shell 脚本程序中，可以调用其他的命令。如果在当前终端中使用命令，则当指定的命令执行完毕后会立即退出终端。  
 > > -c：在空环境中执行指定的命令。  
 > > 例如：exec -c echo Linux C++
 
-*   4、CMD 指令  
-    支持三种格式：  
-    CMD \[“executable” ,”Param1”, “param2”\]使用 exec 执行，推荐  
-    CMD command param1 param2，在/bin/sh 上执行  
-    CMD \[“Param1”, “param2”\] 提供给 ENTRYPOINT 做默认参数。  
-    **每个容器只能执行一条 CMD 命令，多个 CMD 命令时，只最后一条被执行。**
-    
-*   5、EXPOSE  
-    格式为 EXPOSE \[……\] 。  
-    告诉 Docker 服务端容器暴露的端口号，供互联系统使用。在启动 Docker 时，可以通过-P,主机会自动分配一个端口号转发到指定的端口。使用-P，则可以具体指定哪个本地端口映射过来  
-    例如：  
-    EXPOSE 22 80 8443
-    
-*   6、ENV  
-    格式为 ENV 。 指定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持。  
-    例如  
-    ENV PG_MAJOR 9.3  
-    ENV PG_VERSION 9.3.4  
-    RUN curl -SL [http://example.com/postgres-$PG_VERSION.tar.xz](http://example.com/postgres-%24PG_VERSION.tar.xz) | tar -xJC /usr/src/postgress && ……  
-    ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
-    
-*   7、ADD  
-    ADD 命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个 URL，那该 URL 的内容将被下载并复制到容器中。  
-    ADD \[source directory or URL\] \[destination directory\]  
-    ADD /my\_app\_folder /my\_app\_folder
-    
-*   8、ENTRYPOINT  
-    两种格式：  
-    ENTRYPOINT \[“executable”, “param1”, “param2”\]  
-    ENTRYPOINT command param1 param2 （shell 中执行）。  
-    配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。  
-    每个 Dockerfile 中只能有一个 ENTRYPOINT ，当指定多个时，只有最后一个起效。
-    
-*   9、VOLUME  
-    格式为 VOLUME \[“/data”\] 。  
-    创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等。
-    
+- 4、CMD 指令  
+  支持三种格式：  
+  CMD \[“executable” ,”Param1”, “param2”\]使用 exec 执行，推荐  
+  CMD command param1 param2，在/bin/sh 上执行  
+  CMD \[“Param1”, “param2”\] 提供给 ENTRYPOINT 做默认参数。  
+  **每个容器只能执行一条 CMD 命令，多个 CMD 命令时，只最后一条被执行。**
+
+- 5、EXPOSE  
+  格式为 EXPOSE \[……\] 。  
+  告诉 Docker 服务端容器暴露的端口号，供互联系统使用。在启动 Docker 时，可以通过-P,主机会自动分配一个端口号转发到指定的端口。使用-P，则可以具体指定哪个本地端口映射过来  
+  例如：  
+  EXPOSE 22 80 8443
+
+- 6、ENV  
+  格式为 ENV 。 指定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持。  
+  例如  
+  ENV PG_MAJOR 9.3  
+  ENV PG_VERSION 9.3.4  
+  RUN curl -SL [http://example.com/postgres-\$PG_VERSION.tar.xz](http://example.com/postgres-%24PG_VERSION.tar.xz) | tar -xJC /usr/src/postgress && ……  
+  ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+
+- 7、ADD  
+  ADD 命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个 URL，那该 URL 的内容将被下载并复制到容器中。  
+  ADD \[source directory or URL\] \[destination directory\]  
+  ADD /my_app_folder /my_app_folder
+
+- 8、ENTRYPOINT  
+  两种格式：  
+  ENTRYPOINT \[“executable”, “param1”, “param2”\]  
+  ENTRYPOINT command param1 param2 （shell 中执行）。  
+  配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。  
+  每个 Dockerfile 中只能有一个 ENTRYPOINT ，当指定多个时，只有最后一个起效。
+
+- 9、VOLUME  
+  格式为 VOLUME \[“/data”\] 。  
+  创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等。
 
 11、USER  
 格式为 USER daemon 。  
 指定运行容器时的用户名或 UID，后续的 RUN 也会使用指定用户。  
 当服务不需要管理员权限时，可以通过该命令指定运行用户。并且可以在之前创建所需要的用户，例如： RUN groupadd -r postgres && useradd -r -g postgres postgres 。**要临时获取管理员权限可以使用 gosu ，而不推荐 sudo 。**
 
-*   11、WORKDIR  
-    格式为 WORKDIR /path/to/workdir 。  
-    为后续的 RUN 、 CMD 、 ENTRYPOINT 指令配置工作目录。  
-    可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径。例如  
-    WORKDIR /a  
-    WORKDIR b  
-    WORKDIR c  
-    RUN pwd  
-    则最终路径为 /a/b/c 。
-    
-*   12、ONBUILD  
-    格式为 ONBUILD \[INSTRUCTION\] 。  
-    配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令。  
-    例如，Dockerfile 使用如下的内容创建了镜像 image-A 。
-    
+- 11、WORKDIR  
+  格式为 WORKDIR /path/to/workdir 。  
+  为后续的 RUN 、 CMD 、 ENTRYPOINT 指令配置工作目录。  
+  可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径。例如  
+  WORKDIR /a  
+  WORKDIR b  
+  WORKDIR c  
+  RUN pwd  
+  则最终路径为 /a/b/c 。
+
+- 12、ONBUILD  
+  格式为 ONBUILD \[INSTRUCTION\] 。  
+  配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作指令。  
+  例如，Dockerfile 使用如下的内容创建了镜像 image-A 。
 
 ```bash
-[…] 
-ONBUILD ADD . /app/src 
-ONBUILD RUN /usr/local/bin/python-build –dir /app/src 
-[…] 
+[…]
+ONBUILD ADD . /app/src
+ONBUILD RUN /usr/local/bin/python-build –dir /app/src
+[…]
 #如果基于A创建新的镜像时，新的Dockerfile中使用 FROM image-A
  指定基础镜像时，会自动执行 ONBUILD 指令内容，
 等价于在后面添加了两条指令。
@@ -533,36 +524,36 @@ RUN /usr/local/bin/python-build --dir /app/src
 
 使用 ONBUILD 指令的镜像，推荐在标签中注明，例如 ruby:1.9-onbuild 。
 
-*   13 CMD 和 ENTRYPOINT 差异对比  
-    两个共同点：  
-    都可以指定 shell 或 exec 函数调用的方式执行命令；  
-    当存在多个 CMD 指令或 ENTRYPOINT 指令时，只有最后一个生效；  
-    差异：  
-    差异 1：CMD 指令指定的容器启动时命令可以被 docker run 指定的命令覆盖，而 ENTRYPOINT 指令指定的命令不能被覆盖，而是将 docker run 指定的参数当做 ENTRYPOINT 指定命令的参数。  
-    差异 2：CMD 指令可以为 ENTRYPOINT 指令设置默认参数，而且可以被 docker run 指定的参数覆盖；
+- 13 CMD 和 ENTRYPOINT 差异对比  
+  两个共同点：  
+  都可以指定 shell 或 exec 函数调用的方式执行命令；  
+  当存在多个 CMD 指令或 ENTRYPOINT 指令时，只有最后一个生效；  
+  差异：  
+  差异 1：CMD 指令指定的容器启动时命令可以被 docker run 指定的命令覆盖，而 ENTRYPOINT 指令指定的命令不能被覆盖，而是将 docker run 指定的参数当做 ENTRYPOINT 指定命令的参数。  
+  差异 2：CMD 指令可以为 ENTRYPOINT 指令设置默认参数，而且可以被 docker run 指定的参数覆盖；
 
 > ENTRYPOINT 　  
 > An ENTRYPOINT allows you to configure a container that will run as an executable.它可以让你的容器功能表现得像一个可执行程序一样。
-> 
-> > *   例子一：  
-> >     使用下面的 ENTRYPOINT 构造镜像:  
-> >     ENTRYPOINT \["/bin/echo"\]  
-> >     那么 docker build 出来的镜像以后的容器功能就像一个/bin/echo 程序：  
-> >     比如我 build 出来的镜像名称叫 imageecho，那么我可以这样用它：  
-> >     docker run -it imageecho “this is a test”  
-> >     这里就会输出”this is a test”这串字符，而这个 imageecho 镜像对应的容器表现出来的功能就像一个 echo 程序一样。 你添加的参数“this is a test”会添加到 ENTRYPOINT 后面，就成了这样　/bin/echo “this is a test” 。现在你应该明白进入点的意思了吧。
-> > *   例子二：  
-> >     ENTRYPOINT \["/bin/cat"\]  
-> >     构造出来的镜像你可以这样运行(假设名为 st)：  
-> >     docker run -it st /etc/fstab  
-> >     这样相当： /bin/cat /etc/fstab 这个命令的作用。运行之后就输出/etc/fstab 里的内容。
+>
+> > - 例子一：  
+> >   使用下面的 ENTRYPOINT 构造镜像:  
+> >   ENTRYPOINT \["/bin/echo"\]  
+> >   那么 docker build 出来的镜像以后的容器功能就像一个/bin/echo 程序：  
+> >   比如我 build 出来的镜像名称叫 imageecho，那么我可以这样用它：  
+> >   docker run -it imageecho “this is a test”  
+> >   这里就会输出”this is a test”这串字符，而这个 imageecho 镜像对应的容器表现出来的功能就像一个 echo 程序一样。 你添加的参数“this is a test”会添加到 ENTRYPOINT 后面，就成了这样　/bin/echo “this is a test” 。现在你应该明白进入点的意思了吧。
+> > - 例子二：  
+> >   ENTRYPOINT \["/bin/cat"\]  
+> >   构造出来的镜像你可以这样运行(假设名为 st)：  
+> >   docker run -it st /etc/fstab  
+> >   这样相当： /bin/cat /etc/fstab 这个命令的作用。运行之后就输出/etc/fstab 里的内容。
 
 6.3 镜像构建实战
 
-### [_Docker_实战-编写_Dockerfile_](https://www.baidu.com/link?url=Txd6HF2sXm6ny96Fjxt-N3s5dttG95iZVSuRWtIrXvX89AX_aPaS3cRwHcBTD-JmkqeUeDlJSpewjssg6y-vZ9vK1JcdTFmhBF8rf6uXkC_&wd=&eqid=ba06d5a70003473c000000025b1f9ae9)
+### [*Docker*实战-编写*Dockerfile*](https://www.baidu.com/link?url=Txd6HF2sXm6ny96Fjxt-N3s5dttG95iZVSuRWtIrXvX89AX_aPaS3cRwHcBTD-JmkqeUeDlJSpewjssg6y-vZ9vK1JcdTFmhBF8rf6uXkC_&wd=&eqid=ba06d5a70003473c000000025b1f9ae9)
 
 ```python
-[root@docker docker_demo]# cat Dockerfile 
+[root@docker docker_demo]# cat Dockerfile
 # base image
 FROM centos
 
@@ -573,7 +564,7 @@ MAINTAINER json_hc@163.com
 ADD nginx-1.12.2.tar.gz /usr/local/src
 
 # running required command
-RUN yum install -y gcc gcc-c++ glibc make autoconf openssl openssl-devel 
+RUN yum install -y gcc gcc-c++ glibc make autoconf openssl openssl-devel
 RUN yum install -y libxslt-devel -y gd gd-devel GeoIP \
  GeoIP-devel pcre pcre-devel
 RUN useradd -M -s /sbin/nologin nginx
@@ -681,5 +672,3 @@ CMD ["-g"]
 17.5 本章小结  
 第 18 章 集群网络  
 第 19 章 Docker 安全
-
-

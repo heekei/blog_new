@@ -337,9 +337,9 @@ postcss-loader 的 autoprefixer 实现将 css3 属性添加上厂商前缀
 
   > **征对上述的问题解决办法:**
 
-  1. 异步模块可以在 import 的时候加上 chunkName 的注释，比如这样：import(/_ webpackChunkName: "lodash" _/ 'lodash').then() 这样就有 Name 了
+  1. 异步模块可以在 import 的时候加上 chunkName 的注释，比如这样：`import(/* webpackChunkName: "lodash" */ 'lodash').then()` 这样就有 Name 了
 
-  2. 所以我们需要再使用一个插件：name-all-modules-plugin
+  2. 所以我们需要再使用一个插件：`name-all-modules-plugin`
      这个插件中用到一些老的 API，Webpack 4 会发出警告，这个 [pr](https://github.com/timse/name-all-modules-plugin/pull/2/commits/18b460556e625908ca419c1e4798451ab0c5d788) 有新的版本，不过作者不一定会 merge。我们使用的时候可以直接 copy 这个插件的代码到我们的 Webpack 配置里面。
 
 
@@ -566,6 +566,40 @@ module.exports = {
       NODE_ENV: '"development"'
     }
   });
+
+  new webpack.DefinePlugin({
+    PRODUCTION: JSON.stringify(true),
+    VERSION: JSON.stringify('5fa3b9'),
+    BROWSER_SUPPORTS_HTML5: true,
+    TWO: '1+1',
+    'typeof window': JSON.stringify('object')
+  });
+  ```
+
+  `DefinePlugin`可能会被误认为其作用是在 webpack 配置文件中为编译后的代码上下文环境设置全局变量，但其实不然。
+
+  它真正的机制是：`DefinePlugin` 的参数是一个 object，那么其中会有一些 key-value 对。在 webpack 编译的时候，会把业务代码中没有定义（使用 `var/const/let` 来预定义的）而变量名又与 key 相同的变量（直接读代码的话的确像是全局变量）替换成 value。
+
+  例如上面的官方例子，PRODUCTION 就会被替换为 true；VERSION 就会被替换为'5fa3b9'（注意单引号）；BROWSER_SUPPORTS_HTML5 也是会被替换为 true；TWO 会被替换为 1+1（相当于是一个数学表达式）；typeof window 就被替换为'object'了。
+
+  再举个例子，比如你在代码里是这么写的：
+
+  ```js
+  if (!PRODUCTION) console.log('Debug info');
+  if (PRODUCTION) console.log('Production log');
+  ```
+
+  那么在编译生成的代码里就会是这样了：
+
+  ```js
+  if (!true) console.log('Debug info');
+  if (true) console.log('Production log');
+  ```
+
+  而如果你用了 UglifyJsPlugin，则会变成这样：
+
+  ```js
+  console.log('Production log');
   ```
 
 - terser-webpack-plugin
@@ -578,10 +612,12 @@ module.exports = {
   const TerserPlugin = require('terser-webpack-plugin');
   module.exports = {
     optimization: {
-      minimizer: [new TerserPlugin(
-        parallel: true   // 多线程
-      )],
-    },
+      minimizer: [
+        new TerserPlugin(
+          (parallel: true) // 多线程
+        )
+      ]
+    }
   };
   ```
 
@@ -589,51 +625,400 @@ module.exports = {
 
 ## 常用优化手段
 
+webpack 的优化手段主要从两个方向来进行:
+
+1. 减少 Webpack 的打包时间
+2. 减小 Webpack 打包体积
+
+### 减少打包时间策略
+
 - 缩小搜索范围
 
-  ```js
-  module.exports = {
-    module: {
-      // 由于 Loader 对文件的转换操作很耗时，需要让尽可能少的文件被 Loader 处理,可以通过 include 去命中只有哪些文件需要被处理。
-      rules: [
-        {
-          test: /\.js$/,
-          include: path.resolve(__dirname, 'src')
-        }
-      ],
-      //一些库，例如 jQuery 、ChartJS， 它们庞大又没有采用模块化标准，让 Webpack 去解析这些文件耗时又没有意义
-      noParse: [/react\.min\.js$/]
-    },
-    /* 
+webpack 的各种路径搜索递归查找很耗时间,因此对部分选项进行明确的路径配置,减少搜索时间
+
+```js
+module.exports = {
+  module: {
+    // 由于 Loader 对文件的转换操作很耗时，需要让尽可能少的文件被 Loader 处理,可以通过 include 去命中只有哪些文件需要被处理。
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src')
+      }
+    ],
+    //一些库，例如 jQuery 、ChartJS， 它们庞大又没有采用模块化标准，让 Webpack 去解析这些文件耗时又没有意义
+    noParse: [/react\.min\.js$/]
+  },
+  /* 
     resolve.modules 的默认值是 ['node_modules']，含义是先去当前目录下的 ./node_modules 目录下去找想找的模块，如果没找到就去上一级目录 ../node_modules 中找，再没有就去 ../../node_modules 中找，以此类推，这和 Node.js 的模块寻找机制很相似。
   
     当安装的第三方模块都放在项目根目录下的 ./node_modules 目录下时，没有必要按照默认的方式去一层层的寻找，可以指明存放第三方模块的绝对路径，以减少寻找，配置如下
     */
-    resolve: {
-      modules: [path.resolve(__dirname, 'node_modules')],
-      // 入口文件配置
-      mainFields: ['main'],
-      alias: {
-        /* 默认情况下 Webpack 会从入口文件 ./node_modules/react/react.js 开始递归的解析和处理依赖的几十个文件，这会时一个耗时的操作。 通过配置 resolve.alias 可以让 Webpack 在处理 React 库时，直接使用单独完整的 react.min.js 文件，从而跳过耗时的递归解析操作 */
-        react: path.resolve(__dirname, './node_modules/dist/react.min.js')
-      },
-      /*  如果这个列表越长，或者正确的后缀在越后面，就会造成尝试的次数越多，所以 resolve.extensions 的配置也会影响到构建的性能。 在配置 resolve.extensions 时你需要遵守以下几点，以做到尽可能的优化构建性能：
+  resolve: {
+    modules: [path.resolve(__dirname, 'node_modules')],
+    // 入口文件配置
+    mainFields: ['main'],
+    alias: {
+      /* 默认情况下 Webpack 会从入口文件 ./node_modules/react/react.js 开始递归的解析和处理依赖的几十个文件，这会时一个耗时的操作。 通过配置 resolve.alias 可以让 Webpack 在处理 React 库时，直接使用单独完整的 react.min.js 文件，从而跳过耗时的递归解析操作 */
+      react: path.resolve(__dirname, './node_modules/dist/react.min.js')
+    },
+    /*  如果这个列表越长，或者正确的后缀在越后面，就会造成尝试的次数越多，所以 resolve.extensions 的配置也会影响到构建的性能。 在配置 resolve.extensions 时你需要遵守以下几点，以做到尽可能的优化构建性能：
   
       后缀尝试列表要尽可能的小，不要把项目中不可能存在的情况写到后缀尝试列表中。
       频率出现最高的文件后缀要优先放在最前面，以做到尽快的退出寻找过程。
       在源码中写导入语句时，要尽可能的带上后缀，从而可以避免寻找过程。例如在你确定的情况下把 require('./data') 写成 require('./data.json')。 */
-      extension: ['js']
-    }
-  };
-  ```
+    extension: ['js']
+  }
+};
+```
 
-  ***
+- 使用多进程加速 loader
+
+在 webpack 构建的过程中,最耗时的操作就是 loader 处理文件这一步,
+受限于 Node 是单线程运行的，所以 Webpack 在打包的过程中也是单线程的，特别是在执行 Loader 的时候，长时间编译的任务很多，这样就会导致等待的情况。
+
+HappyPack 可以将 Loader 的同步执行转换为并行的，这样就能充分利用系统资源来加快打包效率了
+
+```js
+module: {
+  loaders: [
+    {
+      test: /\.js$/,
+      include: [resolve('src')],
+      exclude: /node_modules/,
+      // id 后面的内容对应下面
+      loader: 'happypack/loader?id=happybabel'
+    }
+  ]
+},
+plugins: [
+  new HappyPack({
+    id: 'happybabel',
+    loaders: ['babel-loader?cacheDirectory'],
+    // 开启 4 个线程
+    threads: 4
+  })
+]
+```
+
+- 使用动态链接库 DllPlugin
+
+::: warning 注意:
+主要用于开发环境
+:::
+
+DllPlugin 可以将特定的类库提前打包然后引入。这种方式可以极大的减少打包类库的次数，只有当类库更新版本才有需要重新打包，并且也实现了将公共代码抽离成单独文件的优化方案。
+
+接下来我们就来学习如何使用 DllPlugin
+
+```js
+// 单独配置在一个文件中
+// webpack.dll.conf.js
+const path = require('path');
+const webpack = require('webpack');
+module.exports = {
+  entry: {
+    // 想统一打包的类库
+    vendor: ['react']
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].dll.js',
+    library: '[name]-[hash]'
+  },
+  plugins: [
+    new webpack.DllPlugin({
+      // name 必须和 output.library 一致
+      name: '[name]-[hash]',
+      // 该属性需要与 DllReferencePlugin 中一致
+      context: __dirname,
+      path: path.join(__dirname, 'dist', '[name]-manifest.json')
+    })
+  ]
+};
+```
+
+然后我们需要执行这个配置文件生成依赖文件，接下来我们需要使用 DllReferencePlugin 将依赖文件引入项目中
+
+```js
+// webpack.conf.js
+module.exports = {
+  // ...省略其他配置
+  plugins: [
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      // manifest 就是之前打包出来的 json 文件
+      manifest: require('./dist/vendor-manifest.json')
+    })
+  ]
+};
+```
+
+- babel-loader 设置缓存
+
+> 设置 babel 的 cacheDirectory 为 true
+
+babel 编译代码的过程太慢了,不仅要使用 exclude、include，尽可能准确的指定要转化内容的范畴，而且要充分利用缓存，进一步提升性能。babel-loader 提供了 cacheDirectory 特定选项（默认 false）：设置时，给定的目录将用于缓存加载器的结果
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader?cacheDirectory=true',
+        exclude: /node_modules/,
+        include: [resolve('src'), resolve('test')]
+      }
+    ]
+  }
+};
+```
+
+- 使用 terser-webpack-plugin 加速代码压缩
+
+::: warning 注意:
+webpack4 使用 [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
+
+webpack3 使用 [webpack-parallel-uglify-plugin](https://github.com/gdborton/webpack-parallel-uglify-plugin#readme)
+
+该插件主要用于线上环境
+:::
+
+压缩是发布前处理最耗时间的一个步骤，因此也需要采用并行多进程的方式来开启加速,如果是你是在 webpack 4 中，只要几行代码，即可加速你的构建发布速度
+
+```js
+const TerserPlugin = require('terser-webpack-plugin');
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+
+    //或者使用ugifyjs开启parallel
+    /* minimizer: [
+      new UglifyJsPlugin({
+        include: /\/includes/,
+        parallel: true // 或者写核心数
+      })
+    ] */
+  }
+};
+```
+
+- 开发环境开启热更新
+
+为了加速本地开发环境的构建速度, 开启热模块替换能节省更多的时间,在 webpack 中只需要开启 devServer 的 hot 选项; 此时 webpack.HotModuleReplacementPlugin 自动会添加到 webpack 中
+
+```js
+module.exports = {
+  //...
+  devServer: {
+    hot: true
+  }
+};
+```
+
+### 减小打包体积策略
+
+- 使用按需加载
+
+一般按需加载都是 PWA 页面路由的懒加载,使用 esmodule 的 import()来进行加载, 此处使用 vue 的路由配置作为示例
+
+```js
+// 如果是首页可以开启preload选项来加速显示
+{
+  path: '/',
+  name: '',
+  meta: { title: '温馨提示' },
+  component: () => import(
+    /* webpackChunkName: "index" */
+    /* webpackPreload: true */
+    './views/index.vue')
+}
+```
+
+- 使用作用域提升 Scope Hoisting
+
+Scope Hoisting 尽可能的把打散的模块合并到一个函数中去，但前提是不能造成代码冗余。 因此只有那些被引用了一次的模块才能被合并,从而减小了代码体积
+
+在 webpack4 只需要开启选项 `concatenateModules` 即可
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    concatenateModules: true
+  }
+};
+```
+
+- 使用 Tree Shaking
+
+::: warning 注意
+
+webpack 4 正式版本扩展了副作用检测能力，通过 `package.json` 的 `"sideEffects"` 属性作为标记，向 compiler 提供提示，表明项目中的哪些文件是 "pure(纯的 ES2015 模块)"，由此可以安全地删除文件中未使用的部分。使用 `Tree Shaking`, 应该明确标识出代码的 `sideEffects`
+
+:::
+
+sideEffects 配置如下
+
+```json
+{
+  "name": "your-project",
+  "sideEffects": ["./src/some-side-effectful-file.js", "*.css", "..."],
+  // 无副作用直接设置为false
+  "sideEffects": false
+}
+```
+
+TreeShaing 的开启如下
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: true,
+    sideEffects: true // 有副作用时此处也要配置为true
+  }
+};
+```
+
+- 压缩代码
+
+webpack4 配置方式需要只需要开启 minimizer 选项即可
+
+```js
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+module.exports = {
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        include: /\/includes/,
+        parallel: true,
+        sourceMap: true, //使用源映射将错误消息位置映射到模块
+        cache: true //启用文件缓存
+      })
+    ]
+  }
+};
+```
+
+- 提取公共代码
+
+多个页面公共的代码抽离成单独的文件, 可以减少网络传输流量，降低服务器成本,也解决了重复代码导致的包体积变大, 再加上缓存策略;能够加速页面加载速度
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
+```
+
+- 使用 prepack
+
+:::warning 警告
+该功能仍然是实验性的, 在生产环境不建议使用
+:::
+
+直接上代码吧
+
+```js
+const PrepackWebpackPlugin = require('prepack-webpack-plugin').default;
+
+module.exports = {
+  plugins: [new PrepackWebpackPlugin()]
+};
+```
+
+- 拷贝静态文件
+
+在前文 Webpack 打包优化之体积篇中提到，引入 DllPlugin 和 DllReferencePlugin 来提前构建一些第三方库，来优化 Webpack 打包。而在生产环境时，就需要将提前构建好的包，同步到 dist 中；这里拷贝静态文件，你可以使用 copy-webpack-plugin 插件：把指定文件夹下的文件复制到指定的目录；其配置如下：
+
+```js
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+module.exports = {
+  plugins: [
+    // ......
+    // copy custom static assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ])
+  ]
+};
+```
+
+## 核心选项 optimization
+
+optimization 包含了 webpack 关键的优化配置选项, 以下几个选项跟浏览器缓存息息相关, 此处做一个记录
+
+- `namedModules`:
+
+  在开发环境的打包结果中,使用路径作为模块的名称, 固化 moduleId
+
+- `namedChunks`:
+
+  在开发环境的打包结果中,固化 runtime 代码以及动态加载时分离出的 chunk 的 chunkId
+
+- `moduleIds`:
+
+  生产环境固化 moduleId
+
+  | 选项       | 描述                                  |
+  | ---------- | ------------------------------------- |
+  | natural    | 按使用顺序的数字 ID                   |
+  | named      | 可读的 ID，以进行更好的调试。         |
+  | hashed     | 短哈希作为 id，可以更好地进行长期缓存 |
+  | size       | 数字 ID 专注于最小的初始下载大小      |
+  | total-size | 数字 ID 专注于最小的总下载大小        |
+
+- `chunkIds`:
+
+  生产环境固化 runtime 和异步代码 chunkId
+
+  选项参照`moduleIds`的配置项
+
+- `nodeEnv`:
+
+  webpack 将 process.env.NODE_ENV 设置为一个给定的字符串。如果 optimization.nodeEnv 不是 false，可以使用 DefinePlugin，配置为 optimization.nodeEnv 的值，如果为 falsy 值，可以返回退到"production"
 
 ## 部分疑惑选项记录
 
 - include/exclude/test 的区别
 
-  ```js
+> **test**：必须满足的条件（正则表达式，不要加引号，匹配要处理的文件）
+> **exclude**：不能满足的条件（排除不处理的目录）
+> **include**：导入的文件将由加载程序转换的路径或文件数组（把要处理的目录包括进来）
+> **loader**：一串“！”分隔的装载机（2.0 版本以上，”-loader”不可以省略）
+> **loaders**：作为字符串的装载器阵列
+
+```js
     module.exports = {
     module: {
       rules: [
@@ -655,15 +1040,17 @@ module.exports = {
       ];
     }
     }
-  ```
+```
 
 - output 选项的 chunkFilename
 
-  作用: 配置无入口的 Chunk 在输出时的文件名称
+> 作用: 配置无入口的 Chunk 在输出时的文件名称
 
-  常见的会在运行时生成 Chunk 场景有在使用 CommonChunkPlugin、使用 import('path/to/module') 动态加载等时。 chunkFilename 支持和 filename 一致的内置变量
+常见的会在运行时生成 Chunk 场景有在使用 CommonChunkPlugin、使用 import('path/to/module') 动态加载等时。 chunkFilename 支持和 filename 一致的内置变量
 
-- 提取公共代码插件 splitChunks 与 dllplugin 的区别:
+- splitChunks 与 dllplugin 的区别:
+
+> 都是提取公共代码插件
 
 总而言之，它们看起来很相似，但它们可以让你击中不同的目标。这么多，你可以考虑在开发环境中使用 DllPlugin（优点：编译时间短），同时使用 splitChunks 进行生产（优点：app 更改时的加载时间短）。同样，您也可以在生产中使用 DllPlugin，只需要连续运行两个版本的小麻烦：一个用于 DLL，另一个用于应用程序。
 
@@ -671,7 +1058,72 @@ module.exports = {
 
 - output 选项中的[hash]以及[chunkhash]
 
-  chunkhash 只能用于生产环境, 而 hash 一般用于开发环境,因为 chunkhash 与 HMR 冲突
+> chunkhash 只能用于生产环境, 而 hash 一般用于开发环境,因为 chunkhash 与 HMR 冲突
+
+- runtime && manifest
+
+> **runtime**: 就是帮助 webpack 编译构建后的打包文件在浏览器运行的一些辅助代码段，换句话说，打包后的文件，除了你自己的源码和 npm 库外，还有 webpack 提供的一点辅助代码段
+
+> **manifest**: 则是 webpack 用以查找 chunk 真实路径所使用的一份关系表，简单来说，就是 chunk 名对应 chunk 路径的关系表
+
+## 注入全局变量
+
+注入全局变量可以使用三种途径来完成
+
+- ProvidePlugin
+
+- exposed-loader
+
+那他们有什么区别呢?
+
+### ProvidePlugin
+
+ProvidePlugin 用来自动加载模块，而不必到处 import 或 require
+
+它的机制是当 webpack 加载到某个 js 模块里，出现了未定义且名称符合（字符串完全匹配）配置中 key 的变量时，会自动 require 配置中 value 所指定的 js 模块
+
+```js
+new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery'
+});
+```
+
+### exposed-loader
+
+看名称可以知道这个一个暴露全局变量的 loader,当某个 js 模块显式地调用 `import $ from 'jquery'`的时候，就会将\$注入到 window 中
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: require.resolve('jquery'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: '$'
+          }
+        ]
+      }
+    ]
+  }
+};
+
+// 在应用代码中使用
+
+import $ from 'jquery';
+
+// 就能直接读取到window.$
+```
+
+::: tip 提示
+html 已经通过 script 引入了一些外部 CDN 模块(例如 `vue.min.js`), 在代码中就不要再次引入
+
+`import Vue from 'vue'`
+
+在 webpack 配置中, 使用 external 选项,将 Vue 给排除在外,以免引起模块多次打包,体积增大
+:::
 
 ## Git 提交钩子(husky 和 yorkie)
 

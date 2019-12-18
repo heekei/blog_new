@@ -92,6 +92,12 @@ module.exports = {
     }],
     ['@vuepress/last-updated', {
       transformer: (timestamp, lang) => new Date(timestamp).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
+    }],
+    ['@vuepress/medium-zoom', {
+      selector: '.theme-default-content img',
+      options: {
+        template: "#zoom-container"
+      }
     }]
   ]
 };
