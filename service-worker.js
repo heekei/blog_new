@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "a6632c5d0c60faa01527a5bb85aaac3d"
+    "revision": "040c351fcdf9014cbc860bf0a1f0cdda"
   },
   {
     "url": "assets/css/0.styles.5edd396c.css",
@@ -230,8 +230,8 @@ self.__precacheManifest = [
     "revision": "2e6bea7d0b0ec3e64b2253c07dc38458"
   },
   {
-    "url": "assets/js/app.41463418.js",
-    "revision": "b0c959cb3d18dc135c20292e68d7416a"
+    "url": "assets/js/app.efb817ff.js",
+    "revision": "7b43525f229817a7043e0e28771ec53a"
   },
   {
     "url": "base/hd-img.jpg",
@@ -239,7 +239,7 @@ self.__precacheManifest = [
   },
   {
     "url": "guide.html",
-    "revision": "a2fe075c3726bdde1bd165968022873b"
+    "revision": "ad522addda5bafc67d9ad3185a3c31ad"
   },
   {
     "url": "icons/icon-144.png",
@@ -263,15 +263,19 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "0e87d1f297ef465c4294ca1cdcf00387"
+    "revision": "d631a172127a294bcb5c1c73fbd06448"
   },
   {
     "url": "life/index.html",
-    "revision": "8969816a7651bca039175a69fac69d9f"
+    "revision": "a72b973c7a7a43206e80dd9bbb88b3ff"
   },
   {
     "url": "life/意志力.html",
-    "revision": "f0b5c11f722a2785ea9a4661e989ab88"
+    "revision": "d6590bd5ab41dca462407b6c312387b8"
+  },
+  {
+    "url": "skills/babel.jpg",
+    "revision": "556a3fee2670533416b98d24a9583f34"
   },
   {
     "url": "technology/babel.jpg",
@@ -283,19 +287,19 @@ self.__precacheManifest = [
   },
   {
     "url": "technology/CSharp/asp-net-自定义服务器控件的使用.html",
-    "revision": "2b2f864c5231718b36a6fe1b65f579ed"
+    "revision": "2731cb6dc44b86cc8eadee67fb8f01fd"
   },
   {
     "url": "technology/CSharp/vs2010-打开-vs2012-的解决方案.html",
-    "revision": "77404dc353e2f7435e332d5b4c029ade"
+    "revision": "e385423813554397b09e2fa212d86514"
   },
   {
     "url": "technology/CSharp/wpf-透明自定义窗口.html",
-    "revision": "946a8504bf628ead15a3a74befd475cd"
+    "revision": "1022c204055359edbbf55d10a4c157b4"
   },
   {
     "url": "technology/Css/css中一些有趣的东西-不定时更新.html",
-    "revision": "7c64fd7c2b6d67af43e163ab828a5772"
+    "revision": "23f4886c13614df3c741518e905c495c"
   },
   {
     "url": "technology/event-loop-1.gif",
@@ -323,7 +327,7 @@ self.__precacheManifest = [
   },
   {
     "url": "technology/HTML5/uc-qq-safari私有meta.html",
-    "revision": "ad91f5491934c8d2245e494da2188333"
+    "revision": "9ddc8e7e82651623c38dbc3b88a4e67c"
   },
   {
     "url": "technology/image-conclude.png",
@@ -331,139 +335,139 @@ self.__precacheManifest = [
   },
   {
     "url": "technology/index.html",
-    "revision": "c55a14d5b99e1634978497d92a499e5a"
+    "revision": "16497fab5340b5d8b51d9a8916f72e0a"
   },
   {
     "url": "technology/Javascript/call bind apply实现.html",
-    "revision": "8c2ddab3a9c96fccdc5f644ed33c4c5a"
+    "revision": "2aaf543a6b29e473b88e954541f9b246"
   },
   {
     "url": "technology/Javascript/Event-loop.html",
-    "revision": "5a328621ccc52208f849fe5a99858509"
+    "revision": "e1463f97adcd9327b39ca1a7ebde06d8"
   },
   {
     "url": "technology/Javascript/JS数组操作基础.html",
-    "revision": "563f9c13395a9f9e542206251cde3426"
+    "revision": "fe9bb908a7908612dd17cebc9b9c33e4"
   },
   {
     "url": "technology/Javascript/onmousemove事件遇到iframe.html",
-    "revision": "85b592e5f166e21e9b28d0d9e8c6a634"
+    "revision": "2a2f1cbab8d9de63fbde7d298178f2a5"
   },
   {
     "url": "technology/Javascript/Promise.html",
-    "revision": "640eeee1f256bbc2c2a82ced2eeeba4d"
+    "revision": "46049fe14261de4ad12d4f7668ca8563"
   },
   {
     "url": "technology/Javascript/requirejs实现.html",
-    "revision": "b46038d49dee6098b5a78902b7d7f65f"
+    "revision": "f37edbf675076b49cc9f2a2b9dc2e1d7"
   },
   {
     "url": "technology/Javascript/Set和Map总结.html",
-    "revision": "d2845d83e9ed4ec9f555bdb602b4f9d1"
+    "revision": "3ae406ecbe70a6f43a9b960d8701446a"
   },
   {
     "url": "technology/Javascript/并行加载与顺序执行.html",
-    "revision": "ce3c5dfe7c373b0dd50a90d14c4d679c"
+    "revision": "e0d67407cf8adbe183150fed940770db"
   },
   {
     "url": "technology/Linux相关/apache-配置虚拟主机及开启ssl.html",
-    "revision": "b06d61b75bb547b0a1fb7eea693e4b7d"
+    "revision": "1bbf7ddf61fcd6c4a2bb1b1593fae108"
   },
   {
     "url": "technology/Linux相关/Centos-Firewall-启用端口.html",
-    "revision": "bd71f04828f65142089606d0848abd75"
+    "revision": "63d02a7d21468d82c29b7390311eeb41"
   },
   {
     "url": "technology/Linux相关/Docker.html",
-    "revision": "2c0fb4205b52ec533e938277a603c58f"
+    "revision": "2fc285cc2f8b38cc0a73732677355a65"
   },
   {
     "url": "technology/Linux相关/查看日志命令.html",
-    "revision": "ca4e10b58b88247ea0581c4e11c14510"
+    "revision": "5e9845b9379d6df8d94def6c8f6bbaeb"
   },
   {
     "url": "technology/Node.js/pkg打包.html",
-    "revision": "bc020a88980e1206855c5d80b5c20dbc"
+    "revision": "5242373f229635eb5d1fffc02e9e46f9"
   },
   {
     "url": "technology/Node.js/说一说gulp.html",
-    "revision": "fd418a69f38a522e56f623c0f0382886"
+    "revision": "bff4263eb526910c0ef693285ee5cdf5"
   },
   {
     "url": "technology/技术进阶/Babel总结.html",
-    "revision": "2643565aa5c2ae56f6d43844d6905cb7"
+    "revision": "40cd4193383781f41f3c6b36d86d7c6a"
   },
   {
     "url": "technology/技术进阶/Base64.html",
-    "revision": "860e80b8ba411ad39fa503f1b16581e1"
+    "revision": "f761e034c7d1cfdfef0a70e329d97fa2"
   },
   {
     "url": "technology/技术进阶/Content-Type和Accept的关系.html",
-    "revision": "7ef3eb27b043353a639ae9437fbd627c"
+    "revision": "1a22f5a2b88a7026b03265f3ff180fdf"
   },
   {
     "url": "technology/技术进阶/Git中~和^的区别.html",
-    "revision": "47ebf61c9d7d91e73d3f7b5cab746d6b"
+    "revision": "cbe51cf64cd20b1e827d95315012336d"
   },
   {
     "url": "technology/技术进阶/Rxjs初探.html",
-    "revision": "74b5c116f0f206704b3eab309fd01ba5"
+    "revision": "4175621082d57dddaf60ba9499001428"
   },
   {
     "url": "technology/技术进阶/Ts知识总结.html",
-    "revision": "ac8fb5c30cdcec607a835413b4bffcf6"
+    "revision": "5f2ce4c726eff08f8ccbfe30d39c8ef8"
   },
   {
     "url": "technology/技术进阶/Webpack入门知识.html",
-    "revision": "4a5fd01a30e3d25ab7ad92dbd8433d1a"
+    "revision": "b8c73a19053b21dc87d6cd4d9b1ce5fb"
   },
   {
     "url": "technology/技术进阶/Webpack异步加载.html",
-    "revision": "efc3ff75c5cd0007563ff9dcec771824"
+    "revision": "71a081d10a95c43677064078642486d6"
   },
   {
     "url": "technology/技术进阶/Webpack模块加载.html",
-    "revision": "6cc9975e36d0bc22b7859592ef0bcd14"
+    "revision": "2c8b43217d979ae942e7aad8322df58e"
   },
   {
     "url": "technology/技术进阶/Webpack模块实现.html",
-    "revision": "eb72cd4f794451848f5740aa2d2d782d"
+    "revision": "2be0b17b404d3272ec8150e4712f81b1"
   },
   {
     "url": "technology/技术进阶/Web性能请求优化.html",
-    "revision": "9a9a6a616ec4907ed7c8579465fd3761"
+    "revision": "2033850119277a23a6e96ac186defe16"
   },
   {
     "url": "technology/技术进阶/前端安全防范.html",
-    "revision": "f34119625a4811b239ace07ede375300"
+    "revision": "cfd5c15d6852de47ee70ba1d12865994"
   },
   {
     "url": "technology/技术进阶/发布订阅vs观察者模式.html",
-    "revision": "fe1b9d3325c0cfb1e1c56d012985f28a"
+    "revision": "13996b49670516a90e303e3497b29af0"
   },
   {
     "url": "technology/技术进阶/图片分类.html",
-    "revision": "034b6dbf2b33f8116c10846f2b3e4452"
+    "revision": "855bc90f013ab635ee936011eb2807db"
   },
   {
     "url": "technology/技术进阶/服务器推送.html",
-    "revision": "57e594bffb5c4a09eb04ed4e611408b7"
+    "revision": "f1f7b94f6000d2563f96edaba9b444e3"
   },
   {
     "url": "technology/技术进阶/浏览器缓存.html",
-    "revision": "ced87e7a0021ef438166929babf358c9"
+    "revision": "d7bce1951b6d1d49dacc6330163407eb"
   },
   {
     "url": "technology/技术进阶/简易依赖注入实现.html",
-    "revision": "4851f115fc64e02ae6fc04b86ddea192"
+    "revision": "e799dadd2c5cfd5221350089877260bc"
   },
   {
     "url": "technology/技术进阶/简易打包工具实现.html",
-    "revision": "387f8ebba733ec41628adaa6ae4c5d21"
+    "revision": "d76884f1b18c6fa812266d5ca9d5da09"
   },
   {
     "url": "technology/算法/基础算法/递归算法.html",
-    "revision": "86e2980c1793c5d9207a5eaca2652f5f"
+    "revision": "ed1810a37daf9e906191c92a463b2afb"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
