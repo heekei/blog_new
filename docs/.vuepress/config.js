@@ -54,7 +54,7 @@ module.exports = {
   head: [ // 注入到当前页面的 HTML <head> 中的标签
     // ['link', { rel: 'icon', href: '/base/hd-img.jpg' }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
-    ['link', { rel: 'apple-touch-icon', href: '/base/hd-img.jpg' }],
+    // ['link', { rel: 'apple-touch-icon', href: '/base/hd-img.jpg' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta', { 'http-quiv': 'pragma', cotent: 'no-cache' }],
@@ -84,7 +84,7 @@ module.exports = {
     '@vuepress/active-header-links',
     '@vuepress/search',
     ['@vuepress/google-analytics', {
-      'ga': 'UA-151094245-1'
+      'ga': 'UA-155211236-1'
     }],
     ['@vuepress/pwa', {
       serviceWorker: true,
